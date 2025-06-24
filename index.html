@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="tg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panda & Mina - Vocabulary Trainer</title>
+    <style>
+        /* Стилҳои асосӣ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Nunito', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #ffd1dc, #a2d2ff);
+            min-height: 100vh;
+            padding: 20px;
+            background-image: url('https://i.imgur.com/panda-bunny-bg.jpg');
+            background-size: cover;
+            background-blend-mode: overlay;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+        }
+        
+        /* Стилҳои нав барои 4 равзана */
+        .tab-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            background: #ff8fb1;
+            color: white;
+            border: none;
+            border-radius: 20px 20px 0 0;
+            margin: 0 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .tab.active {
+            background: #4361ee;
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 20px;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Дизайни ҳамаи қисмҳо... */
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Менюи равзанаҳо -->
+        <div class="tab-container">
+            <button class="tab active" data-tab="vocabulary">Луғатсупорӣ</button>
+            <button class="tab" data-tab="competition">Рақобат</button>
+            <button class="tab" data-tab="chat">Муошират</button>
+            <button class="tab" data-tab="pronunciation">Талаффуз</button>
+        </div>
+        
+        <!-- Равзанаи луғатсупорӣ -->
+        <div class="tab-content active" id="vocabulary">
+            <!-- Қисми асосии луғатсупорӣ -->
+            <div class="header">
+                <img src="https://i.imgur.com/panda-icon.png" alt="Panda" class="character-icon">
+                <h1>Panda & Mina</h1>
+                <img src="https://i.imgur.com/bunny-icon.png" alt="Bunny" class="character-icon">
+                <div class="subtitle">Тарҷумаи калимаҳо аз тоҷикӣ ба англисӣ</div>
+            </div>
+            
+            <div class="unit-selection" id="unit-selection">
+                <!-- Қисмҳои юнитҳо -->
+            </div>
+        </div>
+        
+        <!-- Равзанаи рақобат -->
+        <div class="tab-content" id="competition">
+            <h2>Рақобати онлайн</h2>
+            <div class="competition-area">
+                <!-- Қисми рақобат -->
+            </div>
+        </div>
+        
+        <!-- Равзанаи чат-бот -->
+        <div class="tab-content" id="chat">
+            <h2>Муошират бо Mr. Panda</h2>
+            <div class="chat-container">
+                <!-- Қисми чат-бот -->
+            </div>
+        </div>
+        
+        <!-- Равзанаи талаффуз -->
+        <div class="tab-content" id="pronunciation">
+            <h2>Санҷиши талаффуз</h2>
+            <div class="pronunciation-area">
+                <!-- Қисми талаффуз -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Луғатҳо бо ҳамаи калимаҳо
+        const units = {
+            "Unite 4": [
+                {tajik: "хориҷа", english: "abroad", russian: "за границей"},
+                // ... ҳамаи калимаҳои дигар
+            ],
+            // ... ҳамаи юнитҳои дигар
+        };
+
+        // Функсияҳо барои идоракунии равзанаҳо
+        const tabs = document.querySelectorAll('.tab');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                document.getElementById(tab.dataset.tab).classList.add('active');
+            });
+        });
+
+        // Функсияҳои нав барои ҳар як хусусият:
+        
+        // 1. Системаи рақобат
+        function setupCompetition() {
+            // Коди барои рақобати онлайн
+        }
+        
+        // 2. Чат-бот
+        function setupChatBot() {
+            // Коди барои муошират бо Mr. Panda
+        }
+        
+        // 3. Санҷиши талаффуз
+        function setupPronunciation() {
+            // Коди барои санҷиши талаффуз бо овоз
+        }
+
+        // Оғози барнома
+        document.addEventListener('DOMContentLoaded', () => {
+            setupCompetition();
+            setupChatBot();
+            setupPronunciation();
+        });
+    </script>
+</body>
+</html>
