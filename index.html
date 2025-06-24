@@ -1,1 +1,1021 @@
+# Vocabulary Trainer Website with HTML
 
+Here's a complete HTML code for your vocabulary trainer website with all the features you requested:
+
+```html
+<!DOCTYPE html>
+<html lang="tg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panda & Mina Vocabulary Trainer</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffebee;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        
+        .header {
+            background-color: #e91e63;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-bottom: 5px solid #c2185b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            display: flex;
+            align-items: center;
+        }
+        
+        .header img {
+            height: 50px;
+            margin: 0 15px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .unit-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .unit-btn {
+            background-color: #2196f3;
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 1.2em;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .unit-btn:hover {
+            background-color: #1976d2;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .quiz-container {
+            display: none;
+            padding: 20px;
+            border: 2px solid #e91e63;
+            border-radius: 10px;
+            margin-top: 20px;
+            background-color: #f8f8f8;
+        }
+        
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .word-count {
+            font-weight: bold;
+            color: #e91e63;
+        }
+        
+        .timer {
+            display: flex;
+            align-items: center;
+        }
+        
+        .timer-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #e91e63;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        
+        .question {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .answer-input {
+            width: 100%;
+            padding: 12px;
+            font-size: 1.2em;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .control-btn {
+            padding: 10px 20px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .submit-btn {
+            background-color: #4caf50;
+            color: white;
+        }
+        
+        .submit-btn:hover {
+            background-color: #388e3c;
+        }
+        
+        .restart-btn {
+            background-color: #ff9800;
+            color: white;
+        }
+        
+        .restart-btn:hover {
+            background-color: #f57c00;
+        }
+        
+        .results {
+            display: none;
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #f5f5f5;
+        }
+        
+        .result-item {
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+        }
+        
+        .correct {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+        
+        .incorrect {
+            background-color: #ffebee;
+            color: #c62828;
+        }
+        
+        .tab-container {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            margin-right: 5px;
+            border-radius: 5px 5px 0 0;
+        }
+        
+        .tab.active {
+            background-color: #e91e63;
+            color: white;
+            border-color: #e91e63;
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 0 5px 5px 5px;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .chat-container {
+            height: 400px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow-y: auto;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #f9f9f9;
+        }
+        
+        .chat-message {
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            border-radius: 18px;
+            max-width: 70%;
+        }
+        
+        .user-message {
+            background-color: #e3f2fd;
+            margin-left: auto;
+            border-bottom-right-radius: 5px;
+        }
+        
+        .bot-message {
+            background-color: #f1f1f1;
+            margin-right: auto;
+            border-bottom-left-radius: 5px;
+        }
+        
+        .chat-input {
+            display: flex;
+            margin-top: 10px;
+        }
+        
+        .chat-input-field {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px 0 0 5px;
+        }
+        
+        .chat-send-btn {
+            padding: 10px 15px;
+            background-color: #e91e63;
+            color: white;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+        
+        .pronunciation-container {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .mic-btn {
+            background-color: #e91e63;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 24px;
+            cursor: pointer;
+            margin: 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .feedback {
+            font-size: 1.2em;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        
+        .correct-feedback {
+            color: #4caf50;
+        }
+        
+        .incorrect-feedback {
+            color: #f44336;
+        }
+        
+        .online-competition {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .start-competition-btn {
+            background-color: #e91e63;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        
+        .competition-code {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 10px;
+            width: 200px;
+        }
+        
+        @media (max-width: 768px) {
+            .unit-buttons {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSJ3aGl0ZSIgZD0iTTI1NiA0OEMxNDEuMSA0OCA0OCAxNDEuMSA0OCAyNTZzOTMuMSAyMDggMjA4IDIwOCAyMDgtOTMuMSAyMDgtMjA4UzM3MC45IDQ4IDI1NiA0OHptLTEyLjkgMzA4LjljLTQwLjQgMjUuMi05MC40LTMuNS05MC40LTUwLjcgMC0xMy4xIDMuOC0yNS45IDEwLjktMzYuMyA0LjYtNi42IDkuOS0xMi4zIDE1LjgtMTYuOC0yLjItMS45LTQuNi0zLjUtNy4yLTQuOC0zLjEtMS42LTYuNS0yLjctMTAuMS0zLjUtMTIuOC0yLjgtMjYuOS0yLjQtMzkuOSAxLjItMTIuNSAzLjUtMjMuNCAxMC4xLTMxLjcgNi42LTguMiAxNi4xLTEyLjkgMjcuMS0xMy45IDEwLjYtMSAxOS43IDEuOCAyNy4xIDcuMSA3LjIgNS4yIDEyLjUgMTMuMSAxNS4zIDIyLjQgMi43IDkuMSAzLjEgMTkuMSAxLjUgMjkuMy0xLjUgOS44LTMuNyAxMC4zLTQuNCAxMC4zLTQuNHptMTY3LjYgMTUuOWMtMS43IDkuMS01LjkgMTcuNS0xMS43IDI0LjgtMTEuMSAxNC4xLTI4LjcgMjIuOC00OS4zIDI0LjktMTYuMyAxLjYtMzIuOS0uOC00OC4zLTYuOC0xNS4yLTUuOS0yOC4zLTE1LjItMzcuOS0yNy4xLTkuNS0xMS43LTE1LjEtMjUuNS0xNS45LTQwLjEtLjgtMTQuNiAyLjEtMjkuMSA4LjQtNDEuOCA2LjItMTIuNSAxNS42LTIyLjkgMjcuMi0zMC4xIDExLjQtNy4xIDI0LjItMTEuMSAzNy41LTExLjcgMTMuMi0uNiAyNi4yIDIuMSAzOC4xIDcuOCAxMS43IDUuNiAyMS45IDE0LjEgMjkuNCAyNC4zIDcuNCAxMC4xIDExLjEgMjEuOSAxMC44IDM0LjEtLjEgNC4xLS43IDguMS0xLjcgMTIuMS0xLjkgOS4xLTUuMSAxNy44LTkuNSAyNS44LTQuMyA3LjktOS45IDE1LTE2LjUgMjAuOS0xLjkgMS43LTEuOSAxLjctMS45IDEuN3ptLTc1LjYtMjY0LjVjLTM4LjYgMC03MC4xIDMxLjQtNzAuMSA3MC4xIDAgMzguNiAzMS40IDcwLjEgNzAuMSA3MC4xczcwLjEtMzEuNCA3MC4xLTcwLjFjMC0zOC43LTMxLjQtNzAuMS03MC4xLTcwLjF6Ii8+PC9zdmc+" alt="Panda">
+        <h1>Panda & Mina Vocabulary Trainer</h1>
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSJ3aGl0ZSIgZD0iTTI1NiA0OEMxNDEuMSA0OCA0OCAxNDEuMSA0OCAyNTZzOTMuMSAyMDggMjA4IDIwOCAyMDgtOTMuMSAyMDgtMjA4UzM3MC45IDQ4IDI1NiA0OHptLTk2IDM1MmMwLTE3LjcgMTQuMy0zMiAzMi0zMnMzMiAxNC4zIDMyIDMyLTE0LjMgMzItMzIgMzItMzItMTQuMy0zMi0zMnptOTYtNjRjLTE3LjcgMC0zMi0xNC4zLTMyLTMyczE0LjMtMzIgMzItMzIgMzIgMTQuMyAzMiAzMi0xNC4zIDMyLTMyIDMyem05NiA2NGMwLTE3LjcgMTQuMy0zMiAzMi0zMnMzMiAxNC4zIDMyIDMyLTE0LjMgMzItMzIgMzItMzItMTQuMy0zMi0zMnptLTMyLTk2YzE3LjcgMCAzMiAxNC4zIDMyIDMycy0xNC4zIDMyLTMyIDMyLTMyLTE0LjMtMzItMzIgMTQuMy0zMiAzMi0zMnptLTY0LTY0YzAtMTcuNy0xNC4zLTMyLTMyLTMycy0zMiAxNC4zLTMyIDMyIDE0LjMgMzIgMzIgMzIgMzItMTQuMyAzMi0zMnptLTk2IDk2YzE3LjcgMCAzMiAxNC4zIDMyIDMycy0xNC4zIDMyLTMyIDMyLTMyLTE0LjMtMzItMzIgMTQuMy0zMiAzMi0zMnptLTMyLTk2YzAtMTcuNy0xNC4zLTMyLTMyLTMycy0zMiAxNC4zLTMyIDMyIDE0LjMgMzIgMzIgMzIgMzItMTQuMyAzMi0zMnptMTI4LTY0YzE3LjcgMCAzMiAxNC4zIDMyIDMycy0xNC4zIDMyLTMyIDMyLTMyLTE0LjMtMzItMzIgMTQuMy0zMiAzMi0zMnptMTYwIDEyOGMwIDE3LjctMTQuMyAzMi0zMiAzMnMtMzItMTQuMy0zMi0zMiAxNC4zLTMyIDMyLTMyIDMyIDE0LjMgMzIgMzJ6Ii8+PC9zdmc+" alt="Rabbit">
+    </div>
+    
+    <div class="container">
+        <div class="tab-container">
+            <div class="tab active" onclick="openTab('vocabulary')">Луғатсупорӣ</div>
+            <div class="tab" onclick="openTab('competition')">Рақобати онлайн</div>
+            <div class="tab" onclick="openTab('chat')">Муоширати англисӣ</div>
+            <div class="tab" onclick="openTab('pronunciation')">Санҷиши талафуз</div>
+        </div>
+        
+        <!-- Vocabulary Trainer Tab -->
+        <div id="vocabulary" class="tab-content active">
+            <h2>Луғатсупорӣ</h2>
+            <p>Яке аз юнитҳоро интихоб кунед:</p>
+            
+            <div class="unit-buttons">
+                <button class="unit-btn" onclick="startQuiz('unit4')">Unite 4</button>
+                <button class="unit-btn" onclick="startQuiz('unit5')">Unite 5</button>
+                <button class="unit-btn" onclick="startQuiz('unit4-end')">Unite 4 Охир</button>
+                <button class="unit-btn" onclick="startQuiz('unit5-end')">Unite 5 Охир</button>
+            </div>
+            
+            <div id="quiz-container" class="quiz-container">
+                <div class="quiz-header">
+                    <div class="word-count">Калима 1/49</div>
+                    <div class="timer">
+                        Вақт:
+                        <div class="timer-circle">9:00</div>
+                    </div>
+                </div>
+                
+                <div class="question" id="question">Калимаи англисӣ барои "хориҷа":</div>
+                
+                <input type="text" class="answer-input" id="answer-input" placeholder="Ҷавоби худро нависед...">
+                
+                <div class="controls">
+                    <button class="control-btn restart-btn" onclick="restartQuiz()">Аз нав сар кардан</button>
+                    <button class="control-btn submit-btn" onclick="checkAnswer()">Сабт кардан</button>
+                </div>
+            </div>
+            
+            <div id="results" class="results">
+                <h3>Натиҷаҳо:</h3>
+                <div id="results-list"></div>
+            </div>
+        </div>
+        
+        <!-- Online Competition Tab -->
+        <div id="competition" class="tab-content">
+            <h2>Рақобати онлайн</h2>
+            <div class="online-competition">
+                <p>Барои рақобати онлайн бо ҳамроҳи худ кодро ворид кунед:</p>
+                <input type="text" class="competition-code" placeholder="Коди рақобат">
+                <button class="start-competition-btn" onclick="startCompetition()">Сар кардан</button>
+            </div>
+        </div>
+        
+        <!-- English Chat Tab -->
+        <div id="chat" class="tab-content">
+            <h2>Муоширати англисӣ</h2>
+            <div class="chat-container" id="chat-container">
+                <div class="chat-message bot-message">
+                    <strong>Mr. Panda:</strong> Салом! Чи хел ҳастед? Ман Mr. Panda ҳастам. Кадом юнитро мехоҳед муошират кунед?
+                </div>
+            </div>
+            
+            <div class="chat-input">
+                <input type="text" class="chat-input-field" id="chat-input" placeholder="Пайём нависед...">
+                <button class="chat-send-btn" onclick="sendMessage()">Фиристодан</button>
+            </div>
+        </div>
+        
+        <!-- Pronunciation Test Tab -->
+        <div id="pronunciation" class="tab-content">
+            <h2>Санҷиши талафуз</h2>
+            <div class="pronunciation-container">
+                <p>Тугмаи микрофонро пахш кунед ва калимаро талаффуз кунед:</p>
+                <div id="pronunciation-word" class="question">abroad</div>
+                <button class="mic-btn" onclick="startRecording()">🎤</button>
+                <div id="pronunciation-feedback" class="feedback"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Vocabulary data for all units
+        const vocabularyData = {
+            'unit4': [
+                { english: "abroad", tajik: "хориҷа" },
+                { english: "accept", tajik: "қабул кардан" },
+                { english: "adopted", tajik: "ба фарзанд қабул кардан" },
+                { english: "air conditioner", tajik: "кондиционер" },
+                { english: "awesome", tajik: "таъсирбахш, ҳайратангез" },
+                { english: "bang", tajik: "зарба задан" },
+                { english: "barbecued", tajik: "шашлик кардан" },
+                { english: "barrier", tajik: "монеа" },
+                { english: "bath", tajik: "ванна" },
+                { english: "beg", tajik: "талбидан" },
+                { english: "beggar", tajik: "гадо" },
+                { english: "birth family", tajik: "оилаи биологӣ" },
+                { english: "blog", tajik: "блог" },
+                { english: "board", tajik: "савор шудан" },
+                { english: "buddy", tajik: "рафиқ" },
+                { english: "bumpy", tajik: "пасту баланд (дар роҳ)" },
+                { english: "careful", tajik: "эҳтиёткор" },
+                { english: "crisp", tajik: "хрусткунанда" },
+                { english: "dead", tajik: "мурда" },
+                { english: "desire", tajik: "хоҳиш" },
+                { english: "disappointment", tajik: "ноумедӣ" },
+                { english: "dislike", tajik: "нафрат, бадбинӣ" },
+                { english: "drag", tajik: "тормоздиҳӣ, кашолакунии дилгир" },
+                { english: "drop in", tajik: "даромадан, ҳамроҳ шудан" },
+                { english: "recording studio", tajik: "студияи сабти садо ва видео" },
+                { english: "remind", tajik: "хотиррасон кардан" },
+                { english: "reputation", tajik: "шӯҳрат, обрӯ" },
+                { english: "reverse", tajik: "чаппагардон кардан" },
+                { english: "rhythm", tajik: "вазн, усули мусиқӣ" },
+                { english: "right-wing", tajik: "рост, ҳақонӣ (дар сиёсат)" },
+                { english: "riot", tajik: "исён, саркашӣ" },
+                { english: "rotate", tajik: "давр задан, чархидан" },
+                { english: "sell-out", tajik: "тахфиф, фурӯши пурра" },
+                { english: "sensational", tajik: "сенсационӣ, бошукуҳ" },
+                { english: "sex symbol", tajik: "шахси ҷолиби ҷинсӣ" },
+                { english: "significance", tajik: "маъно, мазмун" },
+                { english: "slash", tajik: "буридан" },
+                { english: "species", tajik: "намуд, зот" },
+                { english: "spill", tajik: "рехтан" },
+                { english: "standstill", tajik: "таваққуф, истодагарӣ" },
+                { english: "struggle", tajik: "мубориза" },
+                { english: "suffragette", tajik: "зане, ки барои ҳуқуқи интихоботӣ мубориза мебарад" },
+                { english: "suffragist", tajik: "тарафдори ҳуқуқи интихобот барои занон" },
+                { english: "tactic", tajik: "тактика" },
+                { english: "telescope", tajik: "телескоп" },
+                { english: "theory", tajik: "назария" },
+                { english: "unaware", tajik: "бехабар" },
+                { english: "undermine", tajik: "аз зер кофтан, заиф кардан" },
+                { english: "unverifiable", tajik: "таҳти тафтиш қарор доштан" },
+                { english: "effective", tajik: "таъсирбахш" }
+            ],
+            'unit4-end': [
+                { english: "emotional energy", tajik: "энергияи ҳиссӣ, энергияи эмоционалӣ" },
+                { english: "fabulous", tajik: "ҳайратангез, таъсирбахш" },
+                { english: "family home", tajik: "хонаи оилавӣ" },
+                { english: "fan", tajik: "вентилятор, ҳавотозакунанда" },
+                { english: "fateful", tajik: "сарнавиштсоз, тақдирсоз" },
+                { english: "fear", tajik: "тарсидан, ҳарос доштан" },
+                { english: "feel up to", tajik: "дар ҳолати хуб будан, қобилияти иҷро карданро доштан" },
+                { english: "fend for oneself", tajik: "худро таъмин кардан, мустақилона зиндагӣ кардан" },
+                { english: "formal", tajik: "расмӣ, муқаррарӣ" },
+                { english: "fortnight", tajik: "ду ҳафта" },
+                { english: "fortune teller", tajik: "фолбин, касе ки тақдирро пешгӯӣ мекунад" },
+                { english: "foul play", tajik: "бозии ношоиста, бозии ношаффоф" },
+                { english: "get the better of", tajik: "касеро фиреб додан, ғолиб шудан бар касе" },
+                { english: "grab", tajik: "капидан, доштан" },
+                { english: "grant", tajik: "ҳадя кардан, додан" },
+                { english: "grasp", tajik: "фишурдан, мустаҳкам доштан" },
+                { english: "hang on", tajik: "печида гирифтан, чаппа шудан" },
+                { english: "heartbroken", tajik: "бо дили шикаста, сахт ғамзада" },
+                { english: "hit on", tajik: "ҳуҷум кардан, зад задан" },
+                { english: "home-grown", tajik: "хоназод, дар хона парваришшуда" },
+                { english: "homecoming", tajik: "ба ватан баргаштан" },
+                { english: "homeless", tajik: "бе хонаву дар, бехона" },
+                { english: "homepage", tajik: "саҳифаи хонагӣ (дар интернет)" },
+                { english: "hometown", tajik: "зодгоҳ, шаҳри модарӣ" },
+                { english: "hop in", tajik: "савор шудан (ба мошин)" },
+                { english: "bound", tajik: "сарҳад, маҳдудият" },
+                { english: "warming", tajik: "гарам, самимӣ" },
+                { english: "house plant", tajik: "растании хонагӣ" },
+                { english: "informal", tajik: "ғайрирасмӣ, ғайриформалӣ" },
+                { english: "kind of", tajik: "як навъ, як хел" },
+                { english: "life insurance", tajik: "суғуртаи зиндагӣ" },
+                { english: "life-size", tajik: "бо андозаи воқеӣ, табиӣ" },
+                { english: "lifelong", tajik: "умрбод, абадӣ" },
+                { english: "like", tajik: "монандӣ, мисли" },
+                { english: "load off", tajik: "холӣ кардан (бор), сабукӣ додан" },
+                { english: "lucky you", tajik: "бахтатон омад, бахти хуб" },
+                { english: "make a living", tajik: "пул кор кардан барои зиндагӣ" },
+                { english: "mega", tajik: "калон, аълосифат" },
+                { english: "mile", tajik: "миля (андозаи масофа)" },
+                { english: "mousse", tajik: "мусс (намуди ширини)" },
+                { english: "nap", tajik: "хоби кӯтоҳ, хоб (замони рӯз)" },
+                { english: "network", tajik: "шабака, тор" },
+                { english: "notorious", tajik: "номаълум, машҳур бо сабаби бад" },
+                { english: "originally", tajik: "аввилан, аслан" },
+                { english: "orphanage", tajik: "хонаи ятимон" },
+                { english: "pass away", tajik: "вафот кардан, мурдан" },
+                { english: "pretty", tajik: "зебо, дилрабо, хуб" },
+                { english: "radius", tajik: "радиус" },
+                { english: "railway track", tajik: "роҳи оҳан" },
+                { english: "raindrop", tajik: "қатраи борон" }
+            ],
+            'unit5': [
+                { english: "recognize", tajik: "донистан, шинохтан" },
+                { english: "rest of", tajik: "бокимонда" },
+                { english: "rough", tajik: "дағал" },
+                { english: "scare", tajik: "тарсондан" },
+                { english: "serve", tajik: "хизмат кардан" },
+                { english: "shabby", tajik: "фарсуда" },
+                { english: "shell", tajik: "пуст (пучок) кардан" },
+                { english: "shell", tajik: "харчанг, раковина" },
+                { english: "shelter", tajik: "паноҳ додан" },
+                { english: "shock", tajik: "шок, шахшавӣ" },
+                { english: "show", tajik: "намоиш, шоу" },
+                { english: "sleeping rough", tajik: "нороҳат хобидан" },
+                { english: "snowstorm", tajik: "бурон" },
+                { english: "strategy", tajik: "стратегия" },
+                { english: "stressed", tajik: "стресс" },
+                { english: "struck gold", tajik: "мавқеи пайдоиши тилло (ҷои хуб ёфтан)" },
+                { english: "subway", tajik: "метро" },
+                { english: "sweeper", tajik: "фаррош" },
+                { english: "Swing it!", tajik: "зуд шав!" },
+                { english: "vivid", tajik: "равшан, дурахшон" },
+                { english: "wander", tajik: "хайрон шудан, саргардон гаштан" },
+                { english: "waterfall", tajik: "шаршара" },
+                { english: "weird", tajik: "аҷиб" },
+                { english: "wish", tajik: "хоҳиш" },
+                { english: "zoom down", tajik: "хурд кардан (масштабро)" },
+                { english: "accumulation", tajik: "ҷамъкунӣ" },
+                { english: "backpacker", tajik: "сайёҳи пиёдагард" },
+                { english: "ban", tajik: "манъ кардан" },
+                { english: "best-selling", tajik: "моли бозоргир" },
+                { english: "biodegrade", tajik: "вайрон шудан бо таъсири бактерия" },
+                { english: "cancer", tajik: "саратон" },
+                { english: "cheap", tajik: "арзон" },
+                { english: "choke", tajik: "буғӣ кардан, нафасгир шудан" },
+                { english: "clog", tajik: "боз доштан, ҳаракатро мушкил кардан" },
+                { english: "coastal", tajik: "наздисоҳилӣ" },
+                { english: "coastline", tajik: "хати соҳил" },
+                { english: "comb", tajik: "шона" },
+                { english: "command", tajik: "фармон додан" },
+                { english: "complex", tajik: "маҷмӯъ, комплекс" },
+                { english: "consequence", tajik: "натиҷа" },
+                { english: "conservationist", tajik: "табиатҳимоякунанда" },
+                { english: "corridor", tajik: "роҳрав, долон" },
+                { english: "countless", tajik: "бе ҳисоб, бениҳоят" },
+                { english: "crime story", tajik: "достони ҷиноятӣ" },
+                { english: "culprit", tajik: "гунаҳкор, ҷинояткор" },
+                { english: "debris", tajik: "шикастапора, парокандапораҳо" },
+                { english: "destination", tajik: "ҷои таъиншуда" },
+                { english: "devastating", tajik: "вайронкунанда, харобкунанда" },
+                { english: "discover", tajik: "ошкор кардан" },
+                { english: "do away with", tajik: "бекор кардан" }
+            ],
+            'unit5-end': [
+                { english: "edge", tajik: "канор, край" },
+                { english: "emperor", tajik: "император" },
+                { english: "engineering", tajik: "санъати муҳандисӣ" },
+                { english: "environmental emergency", tajik: "ҳолати фавқулодаи экологӣ" },
+                { english: "explorer", tajik: "тадқиқотчӣ" },
+                { english: "fighter plane", tajik: "ҳавопаймои ҷангӣ" },
+                { english: "filler", tajik: "пуркунанда, даҳана (барои рехтани моеъ)" },
+                { english: "fleck", tajik: "доғ, доғи кунҷитак" },
+                { english: "fraction", tajik: "қисм, каср" },
+                { english: "fragment", tajik: "пора, порча" },
+                { english: "get down to", tajik: "ба кор шурӯъ кардан" },
+                { english: "business", tajik: "кор, тиҷорат" },
+                { english: "gobble up", tajik: "фурӯ бурдан" },
+                { english: "GPS (Global Positioning System)", tajik: "системаи глобалии муайян кардани мавқеъ" },
+                { english: "headache", tajik: "сардард" },
+                { english: "heart of sth", tajik: "маркази чизе" },
+                { english: "helmet", tajik: "тосқулоҳ" },
+                { english: "hostel", tajik: "хобгоҳи донишҷӯён" },
+                { english: "hot air balloon", tajik: "пуфаки ҳавоӣ" },
+                { english: "jewellery", tajik: "ҷавоҳирот, заргарӣ" },
+                { english: "jute bag", tajik: "халтаи ҷутӣ" },
+                { english: "lethal", tajik: "кушанда, марговар" },
+                { english: "litter", tajik: "партов" },
+                { english: "loss", tajik: "талафот" },
+                { english: "make the big time", tajik: "ба муваффақият ноил шудан" },
+                { english: "massive", tajik: "калон, масивӣ" },
+                { english: "maze", tajik: "пурпечу хам, роҳравҳои печида" },
+                { english: "merchant", tajik: "тоҷир" },
+                { english: "misleading", tajik: "гумроҳкунанда" },
+                { english: "moulding", tajik: "кандакорӣ, формовка" },
+                { english: "mug", tajik: "кружка" },
+                { english: "must-see", tajik: "он чизе, ки бояд дида шавад" },
+                { english: "nurdle", tajik: "моддаи пластикӣ (майда, барои истеҳсол)" },
+                { english: "obscenity", tajik: "бешарафӣ, беадабӣ" },
+                { english: "ouch", tajik: "ай ай (баёнгари дард, афсӯс, тарс)" },
+                { english: "out of control", tajik: "беназорат" },
+                { english: "outskirts", tajik: "канораҳои шаҳр" },
+                { english: "overboard", tajik: "берун аз борт" },
+                { english: "overland", tajik: "хушкӣ, заминӣ" },
+                { english: "overtime", tajik: "packaging" },
+                { english: "paradise island", tajik: "ҷазираи биҳиштӣ" },
+                { english: "part", tajik: "ҷудо кардан" },
+                { english: "pellets", tajik: "тӯбча, шарикча" },
+                { english: "personal assistant", tajik: "ёрдамчии шахсӣ" },
+                { english: "pleased with", tajik: "хурсанд, розӣ" },
+                { english: "poll", tajik: "пурсиш" },
+                { english: "pollute", tajik: "ифлос кардан" },
+                { english: "posts", tajik: "почта, сутунҳо" },
+                { english: "pristine", tajik: "тоза, норасида, вайроннашуда" }
+            ]
+        };
+
+        // Current quiz state
+        let currentQuiz = {
+            unit: null,
+            words: [],
+            currentIndex: 0,
+            correctAnswers: 0,
+            incorrectAnswers: 0,
+            results: [],
+            timeLeft: 540, // 9 minutes in seconds
+            timerInterval: null
+        };
+
+        // Tab navigation
+        function openTab(tabId) {
+            // Hide all tab contents
+            const tabContents = document.getElementsByClassName('tab-content');
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove('active');
+            }
+            
+            // Remove active class from all tabs
+            const tabs = document.getElementsByClassName('tab');
+            for (let i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove('active');
+            }
+            
+            // Show the selected tab content and mark tab as active
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        // Start quiz for a specific unit
+        function startQuiz(unit) {
+            currentQuiz.unit = unit;
+            currentQuiz.words = [...vocabularyData[unit]];
+            currentQuiz.currentIndex = 0;
+            currentQuiz.correctAnswers = 0;
+            currentQuiz.incorrectAnswers = 0;
+            currentQuiz.results = [];
+            currentQuiz.timeLeft = 540;
+            
+            // Shuffle the words array
+            shuffleArray(currentQuiz.words);
+            
+            // Show quiz container
+            document.getElementById('quiz-container').style.display = 'block';
+            document.getElementById('results').style.display = 'none';
+            
+            // Start timer
+            if (currentQuiz.timerInterval) {
+                clearInterval(currentQuiz.timerInterval);
+            }
+            startTimer();
+            
+            // Display first question
+            displayQuestion();
+        }
+
+        // Shuffle array function
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        // Start timer
+        function startTimer() {
+            updateTimerDisplay();
+            currentQuiz.timerInterval = setInterval(() => {
+                currentQuiz.timeLeft--;
+                updateTimerDisplay();
+                
+                if (currentQuiz.timeLeft <= 0) {
+                    clearInterval(currentQuiz.timerInterval);
+                    endQuiz();
+                }
+            }, 1000);
+        }
+
+        // Update timer display
+        function updateTimerDisplay() {
+            const minutes = Math.floor(currentQuiz.timeLeft / 60);
+            const seconds = currentQuiz.timeLeft % 60;
+            document.querySelector('.timer-circle').textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        }
+
+        // Display current question
+        function displayQuestion() {
+            const currentWord = currentQuiz.words[currentQuiz.currentIndex];
+            const questionText = Math.random() > 0.5 
+                ? `Калимаи англисӣ барои "${currentWord.tajik}":`
+                : `Маънои калимаи "${currentWord.english}":`;
+            
+            document.getElementById('question').textContent = questionText;
+            document.getElementById('answer-input').value = '';
+            document.getElementById('answer-input').focus();
+            
+            // Update word count
+            document.querySelector('.word-count').textContent = `Калима ${currentQuiz.currentIndex + 1}/${currentQuiz.words.length}`;
+        }
+
+        // Check user's answer
+        function checkAnswer() {
+            const currentWord = currentQuiz.words[currentQuiz.currentIndex];
+            const userAnswer = document.getElementById('answer-input').value.trim().toLowerCase();
+            
+            let correctAnswer, isCorrect;
+            
+            if (document.getElementById('question').textContent.includes('англисӣ')) {
+                correctAnswer = currentWord.english.toLowerCase();
+                isCorrect = userAnswer === correctAnswer;
+            } else {
+                correctAnswer = currentWord.tajik.toLowerCase();
+                isCorrect = userAnswer === correctAnswer;
+            }
+            
+            // Store result
+            currentQuiz.results.push({
+                question: document.getElementById('question').textContent,
+                userAnswer: userAnswer,
+                correctAnswer: document.getElementById('question').textContent.includes('англисӣ') 
+                    ? currentWord.english 
+                    : currentWord.tajik,
+                isCorrect: isCorrect
+            });
+            
+            if (isCorrect) {
+                currentQuiz.correctAnswers++;
+            } else {
+                currentQuiz.incorrectAnswers++;
+            }
+            
+            // Move to next question or end quiz
+            currentQuiz.currentIndex++;
+            if (currentQuiz.currentIndex < currentQuiz.words.length) {
+                displayQuestion();
+            } else {
+                endQuiz();
+            }
+        }
+
+        // End quiz and show results
+        function endQuiz() {
+            clearInterval(currentQuiz.timerInterval);
+            document.getElementById('quiz-container').style.display = 'none';
+            
+            const resultsList = document.getElementById('results-list');
+            resultsList.innerHTML = '';
+            
+            // Display all results
+            currentQuiz.results.forEach((result, index) => {
+                const resultItem = document.createElement('div');
+                resultItem.className = `result-item ${result.isCorrect ? 'correct' : 'incorrect'}`;
+                
+                resultItem.innerHTML = `
+                    <p><strong>Савол ${index + 1}:</strong> ${result.question}</p>
+                    <p><strong>Ҷавоби шумо:</strong> ${result.userAnswer}</p>
+                    <p><strong>Ҷавоби дуруст:</strong> ${result.correctAnswer}</p>
+                `;
+                
+                resultsList.appendChild(resultItem);
+            });
+            
+            // Show summary
+            const summary = document.createElement('div');
+            summary.innerHTML = `
+                <h4>Хулоса:</h4>
+                <p>Ҷавобҳои дуруст: ${currentQuiz.correctAnswers}</p>
+                <p>Ҷавобҳои нодуруст: ${currentQuiz.incorrectAnswers}</p>
+                <p>Фоизи муваффақият: ${Math.round((currentQuiz.correctAnswers / currentQuiz.words.length) * 100)}%</p>
+            `;
+            resultsList.prepend(summary);
+            
+            document.getElementById('results').style.display = 'block';
+        }
+
+        // Restart quiz
+        function restartQuiz() {
+            startQuiz(currentQuiz.unit);
+        }
+
+        // Chat bot functionality
+        function sendMessage() {
+            const chatInput = document.getElementById('chat-input');
+            const message = chatInput.value.trim();
+            
+            if (message) {
+                // Add user message to chat
+                addMessageToChat(message, 'user');
+                
+                // Process message and generate bot response
+                const botResponse = generateBotResponse(message);
+                
+                // Add bot response to chat after a short delay
+                setTimeout(() => {
+                    addMessageToChat(botResponse, 'bot');
+                }, 500);
+                
+                // Clear input
+                chatInput.value = '';
+            }
+        }
+
+        // Add message to chat
+        function addMessageToChat(message, sender) {
+            const chatContainer = document.getElementById('chat-container');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-message ${sender}-message`;
+            
+            if (sender === 'bot') {
+                messageDiv.innerHTML = `<strong>Mr. Panda:</strong> ${message}`;
+            } else {
+                messageDiv.innerHTML = `<strong>Шумо:</strong> ${message}`;
+            }
+            
+            chatContainer.appendChild(messageDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        // Generate bot response
+        function generateBotResponse(message) {
+            const lowerMessage = message.toLowerCase();
+            
+            // Check if user is selecting a unit
+            if (lowerMessage.includes('unit') || lowerMessage.includes('юнит')) {
+                if (lowerMessage.includes('4') && !lowerMessage.includes('5')) {
+                    return `Хуб, барои юнит 4 омодаед? Биёед аз ин калимаҳо оғоз кунем: "${vocabularyData['unit4'][0].english}" - маънояш чист?`;
+                } else if (lowerMessage.includes('5') && !lowerMessage.includes('4')) {
+                    return `Алҳамдулиллоҳ, юнит 5-ро интихоб кардед. Биёед аз ин калима оғоз кунем: "${vocabularyData['unit5'][0].english}" - маънояш чист?`;
+                } else if (lowerMessage.includes('4') && lowerMessage.includes('охир')) {
+                    return `Фаҳмидам, шумо юнит 4 охирро мехоҳед. Биёед аз ин калима оғоз кунем: "${vocabularyData['unit4-end'][0].english}" - маънояш чист?`;
+                } else if (lowerMessage.includes('5') && lowerMessage.includes('охир')) {
+                    return `Хуб, барои юнит 5 охир омодаед? Биёед аз ин калима оғоз кунем: "${vocabularyData['unit5-end'][0].english}" - маънояш чист?`;
+                }
+            }
+            
+            // Check if user is asking for meaning of a word
+            for (const unit in vocabularyData) {
+                for (const wordObj of vocabularyData[unit]) {
+                    if (lowerMessage.includes(wordObj.english.toLowerCase()) || 
+                        lowerMessage.includes(wordObj.tajik.toLowerCase())) {
+                        return `"${wordObj.english}" маънояш "${wordObj.tajik}" мебошад. Оё мехоҳед калимаи дигарро санҷед?`;
+                    }
+                }
+            }
+            
+            // Default responses
+            const greetings = ['Салом', 'ҳай', 'ҳелло', 'привет'];
+            if (greetings.some(g => lowerMessage.includes(g.toLowerCase()))) {
+                return 'Салом! Ман Mr. Panda ҳастам. Кадом юнитро мехоҳед муошират кунед? (Unite 4, Unite 5, Unite 4 охир, Unite 5 охир)';
+            }
+            
+            const thanks = ['рахмат', 'ташаккур', 'спасибо'];
+            if (thanks.some(t => lowerMessage.includes(t.toLowerCase()))) {
+                return 'Ҳар кадом вақт! Оё мехоҳед бо калимаҳои дигар муошират кунед?';
+            }
+            
+            const farewells = ['худо ҳофиз', 'бай', 'goodbye'];
+            if (farewells.some(f => lowerMessage.includes(f.toLowerCase()))) {
+                return 'Худо ҳофиз! Хуш омадед!';
+            }
+            
+            // If no specific response, give a random prompt
+            const randomPrompts = [
+                'Мехоҳед калимаи навро омӯзед?',
+                'Кадом юнитро мехоҳед санҷед?',
+                'Оё ба шумо кӯмак лозим аст?',
+                'Метавонам ба шумо дар омӯзиши калимаҳо кӯмак кунам.'
+            ];
+            
+            return randomPrompts[Math.floor(Math.random() * randomPrompts.length)];
+        }
+
+        // Pronunciation test
+        function startRecording() {
+            const word = document.getElementById('pronunciation-word').textContent;
+            const feedback = document.getElementById('pronunciation-feedback');
+            
+            feedback.textContent = `Ҳоло "${word}"-ро талаффуз кунед...`;
+            feedback.className = 'feedback';
+            
+            // Simulate recording and checking (in a real app, this would use the Web Speech API)
+            setTimeout(() => {
+                // For demo purposes, we'll just say it's correct sometimes
+                const isCorrect = Math.random() > 0.3;
+                
+                if (isCorrect) {
+                    feedback.textContent = `Алҳамдулиллоҳ! Шумо "${word}"-ро дуруст талаффуз кардед!`;
+                    feedback.className = 'feedback correct-feedback';
+                } else {
+                    feedback.textContent = `Нодуруст талаффуз кардед. Боз кӯшиш кунед: "${word}"`;
+                    feedback.className = 'feedback incorrect-feedback';
+                }
+                
+                // Change word after feedback
+                setTimeout(() => {
+                    changePronunciationWord();
+                }, 2000);
+            }, 2000);
+        }
+
+        // Change pronunciation word
+        function changePronunciationWord() {
+            const feedback = document.getElementById('pronunciation-feedback');
+            feedback.textContent = '';
+            feedback.className = 'feedback';
+            
+            // Get a random word from any unit
+            const units = Object.keys(vocabularyData);
+            const randomUnit = units[Math.floor(Math.random() * units.length)];
+            const randomWord = vocabularyData[randomUnit][Math.floor(Math.random() * vocabularyData[randomUnit].length)];
+            
+            document.getElementById('pronunciation-word').textContent = randomWord.english;
+        }
+
+        // Online competition
+        function startCompetition() {
+            const code = document.querySelector('.competition-code').value.trim();
+            
+            if (code) {
+                alert(`Рақобат бо код ${code} оғоз ёфт! Дар ҳоли ҳозир ин хусусияти демо мебошад.`);
+            } else {
+                alert('Лутфан коди рақобатро ворид кунед!');
+            }
+        }
+
+        // Initialize pronunciation word
+        changePronunciationWord();
+
+        // Allow pressing Enter in chat
+        document.getElementById('chat-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // Allow pressing Enter in quiz answer input
+        document.getElementById('answer-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkAnswer();
+            }
+        });
+    </script>
+</body>
+</html>
+```
+
+## Features Included:
+
+1. **Vocabulary Trainer**:
+   - 4 different units (Unite 4, Unite 5, Unite 4 End, Unite 5 End)
+   - All vocabulary words you provided are included
+   - Timer countdown (9 minutes)
+   - Random question generation (English to Tajik or vice versa)
+   - Results tracking with correct/incorrect answers
+
+2. **Online Competition**:
+   - Interface for entering competition code
+   - Placeholder functionality (would need backend for real implementation)
+
+3. **English Chat with Mr. Panda**:
+   - Chat bot that responds to questions about vocabulary
+   - Can select different units to practice
+   - Basic conversation capabilities
+
+4. **Pronunciation Test**:
+   - Microphone button to simulate pronunciation check
+   - Feedback on pronunciation accuracy
+   - Random word selection
+
+5. **Design Elements**:
+   - Pink color scheme as requested
+   - Panda and rabbit icons in the header
+   - Responsive design for mobile devices
+   - Clean, modern interface
+
+6. **Navigation**:
+   - Tab system to switch between different features
+   - Clear labeling in Tajik language
+
+The code is ready to use - just copy and paste it into an HTML file and open it in a browser. For a real implementation, you would need to add server-side functionality for the online competition feature and real speech recognition for the pronunciation test.
