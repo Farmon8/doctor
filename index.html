@@ -1,1 +1,150 @@
+Мо метавонем коди логин/паролро тавре тағир диҳем, ки корбарон бе логин парол ба система ворид шаванд ва танҳо дар охири тест пайдоиш кунанд. Инҳо тағиротҳо мебошанд:
 
+1. Қисми логинро аз код нест мекунем
+2. Ба ҷои он, корбар фавран ба саҳифаи интихоби юнит меравад
+3. Дар охири тест, пайдоиши хусусӣ илова мекунем
+
+Инҳо тағиротҳои асосӣ мебошанд:
+
+```html
+<!DOCTYPE html>
+<html lang="tg">
+<!-- Қисмҳои дигари HTML боқӣ мемонанд... -->
+
+<body>
+    <!-- Қисми логинро нест мекунем -->
+    
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="panda-icon">🐼</div>
+            <h1>Panda & Mina</h1>
+            <div class="bunny-icon">🐰</div>
+            <div class="subtitle">Тарҷумаи калимаҳо аз тоҷикӣ ба англисӣ</div>
+        </div>
+        
+        <!-- Unit Selection Screen -->
+        <div class="unit-selection" id="unit-selection">
+            <!-- Қисмҳои дигари HTML боқӣ мемонанд... -->
+        </div>
+        
+        <!-- Қисмҳои дигари HTML боқӣ мемонанд... -->
+    </div>
+
+<script>
+        // Vocabulary for all units with Russian translations
+        const units = {
+            // Қисмҳои дигари vocabulary боқӣ мемонанд...
+        };
+
+        // DOM elements
+        const unitSelection = document.getElementById('unit-selection');
+        const testScreen = document.getElementById('test-screen');
+        const resultsScreen = document.getElementById('results-screen');
+        const tajikWordDisplay = document.getElementById('tajik-word');
+        const russianWordDisplay = document.getElementById('russian-word');
+        const answerInput = document.getElementById('answer');
+        const timerDisplay = document.getElementById('timer');
+        const progressDisplay = document.getElementById('progress');
+        const continueBtn = document.getElementById('continue-btn');
+        const restartBtn = document.getElementById('restart-btn');
+        const showErrorsBtn = document.getElementById('show-errors-btn');
+        const errorsContainer = document.getElementById('errors-container');
+        const scoreDisplay = document.getElementById('score');
+        const percentageDisplay = document.getElementById('percentage');
+        const mistakesCountDisplay = document.getElementById('mistakes-count');
+        const messageDisplay = document.getElementById('message');
+        
+        // Unit buttons
+        const unit4Btn = document.getElementById('unit4-btn');
+        const unit5Btn = document.getElementById('unit5-btn');
+        const unit4EndBtn = document.getElementById('unit4-end-btn');
+        const unit5EndBtn = document.getElementById('unit5-end-btn');
+
+        // State variables
+        let currentVocabulary = [];
+        let currentWordIndex = 0;
+        let score = 0;
+        let timeLeft = 540; // 9 minutes in seconds (540 seconds)
+        let timer;
+        let mistakes = [];
+        let selectedUnit = "";
+        
+        // Initialize unit selection immediately
+        unitSelection.style.display = 'grid';
+        testScreen.style.display = 'none';
+        resultsScreen.style.display = 'none';
+
+        // Initialize unit selection
+        unit4Btn.addEventListener('click', () => startUnit("Unite 4"));
+        unit5Btn.addEventListener('click', () => startUnit("Unite 5"));
+        unit4EndBtn.addEventListener('click', () => startUnit("Unite 4 охир"));
+        unit5EndBtn.addEventListener('click', () => startUnit("Unite 5 охир"));
+
+        // Start selected unit
+        function startUnit(unitName) {
+            selectedUnit = unitName;
+            currentVocabulary = [...units[unitName]]; // Copy the array
+            shuffleArray(currentVocabulary); // Shuffle the words
+            
+            currentWordIndex = 0;
+            score = 0;
+            timeLeft = 540;
+            mistakes = [];
+            
+            unitSelection.style.display = 'none';
+            testScreen.style.display = 'block';
+            resultsScreen.style.display = 'none';
+            
+            // Disable continue button initially
+            continueBtn.disabled = true;
+            showWord();
+            startTimer();
+            
+            setTimeout(() => {
+                answerInput.focus();
+            }, 100);
+        }
+
+        // Finish game with special message
+        function finishGame() {
+            clearInterval(timer);
+            
+            const percentage = Math.round((score / currentVocabulary.length) * 100);
+            
+            // Update UI
+            scoreDisplay.textContent = score;
+            percentageDisplay.textContent = `${percentage}%`;
+            mistakesCountDisplay.textContent = mistakes.length;
+            
+            // Special messages based on performance
+            if (percentage >= 90) {
+                messageDisplay.textContent = "Аъло! Шумо моҳири забони англисӣ ҳастед! 👏";
+            } else if (percentage >= 70) {
+                messageDisplay.textContent = "Хуб! Натиҷаи хуб! 👍";
+            } else if (percentage >= 42) {
+                messageDisplay.textContent = "Мина панда шуморо дуст медорад! ❤️";
+            } else {
+                messageDisplay.textContent = "Ноумед нашав, панда бо туст! 🐼 Барои такрор кӯшиш кунед!";
+            }
+            
+            testScreen.style.display = 'none';
+            resultsScreen.style.display = 'block';
+            errorsContainer.style.display = 'none';
+        }
+
+        // Қисмҳои дигари JavaScript боқӣ мемонанд...
+    </script>
+</body>
+</html>
+```
+
+Ин тағиротҳо инҳоро иҷро мекунанд:
+
+1. Қисми логинро нест кардем - корбарон фавран ба саҳифаи асосӣ мераванд
+2. Дар охири тест, пайдоиши хусусӣ илова кардем:
+   - Агар корбар аз 42% зиёд супорида бошад: "Мина панда шуморо дуст медорад! ❤️"
+   - Агар аз 42% кам бошад: "Ноумед нашав, панда бо туст! 🐼 Барои такрор кӯшиш кунед!"
+3. Қисмҳои дигари функсионалӣ боқӣ монданд
+
+Ин тарҳ ба корбарон имкон медиҳад, ки бе ҳар гуна логин/парол аз система истифода баранд ва танҳо дар охири тест пайдоиши хусусӣ гиранд.
