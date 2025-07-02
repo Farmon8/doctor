@@ -1,6 +1,6 @@
- <!DOCTYPE html>
- <html lang="tg">
- <head>
+<!DOCTYPE html>
+<html lang="tg">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panda & Mina - Vocabulary Trainer</title>
@@ -136,8 +136,7 @@
             margin-bottom: 30px;
         }
         
-        .progress-container {
-            background: linear-gradient(to right, #ffacc7, #ff85a2);
+        .progress-container {background: linear-gradient(to right, #ffacc7, #ff85a2);
             border-radius: 50px;
             padding: 10px 25px;
             font-size: 1.2rem;
@@ -270,8 +269,7 @@
         
         .continue-btn:disabled {
             background: linear-gradient(to right, #cccccc, #999999) !important;
-            cursor: not-allowed;
-            transform: none !important;
+            cursor: not-allowed;transform: none !important;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
             opacity: 0.7;
         }
@@ -321,21 +319,23 @@
         .stat-item {
             font-size: 1.5rem;
             margin: 15px 0;
- color: #2d3047;
+            color: #2d3047;
             text-align: center;
             padding: 8px 0;
             border-bottom: 1px dashed #ffacc7;
         }
+        
         .stat-value {
             font-weight: 800;
             color: #ff5c8d;
             text-shadow: 0 1px 2px rgba(0,0,0,0.1);
         }
+        
         .message {
             font-size: 1.8rem;
             text-align: center;
             margin: 25px 0;
- color: #3f37c9;
+            color: #3f37c9;
             font-weight: 700;
             padding: 20px;
             background: rgba(255, 255, 255, 0.8);
@@ -343,6 +343,7 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             border: 2px solid #ffacc7;
         }
+        
         .panda-message {
             font-size: 2rem;
             text-align: center;
@@ -407,8 +408,7 @@
             background: white;
             border-radius: 20px;
             padding: 25px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-            border: 2px solid #ffacc7;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);border: 2px solid #ffacc7;
             max-height: 400px;
             overflow-y: auto;
         }
@@ -558,8 +558,7 @@
             color: #2d3047;
         }
         
-        .admin-btn {
-            background: linear-gradient(to right, #4cc9f0, #4361ee);
+        .admin-btn {background: linear-gradient(to right, #4cc9f0, #4361ee);
             color: white;
             border: none;
             padding: 10px 15px;
@@ -713,8 +712,7 @@
         
         .sentence-incorrect {
             background-color: #f8d7da;
-            color: #721c24;
-            border: 2px solid #f5c6cb;
+            color: #721c24;border: 2px solid #f5c6cb;
         }
         
         .sentence-correct-answer {
@@ -857,20 +855,18 @@
             }
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?
- family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
- </head>
- <body>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
     <!-- Flower Decorations -->
-    <div class="flower flower-1"> </div>
-    <div class="flower flower-2"> </div>
-    <div class="flower flower-3"> </div>
-    <div class="flower flower-4"> </div>
+    <div class="flower flower-1">🌸</div>
+    <div class="flower flower-2">🌺</div>
+    <div class="flower flower-3">🌼</div>
+    <div class="flower flower-4">🌻</div>
     
     <!-- Login Screen (hidden by default now) -->
     <div class="login-screen" id="login-screen">
-        <div class="login-box">
-            <h2 class="login-title">Воҳидҳои леĸсиĸӣ</h2>
+        <div class="login-box"><h2 class="login-title">Воҳидҳои лексикӣ</h2>
             <input type="text" id="username" class="login-input" placeholder="Логин">
             <input type="password" id="password" class="login-input" placeholder="Парол">
             <button class="login-btn" id="login-btn">Даромадан</button>
@@ -880,8 +876,8 @@
     
     <!-- Admin Panel -->
     <div class="admin-panel" id="admin-panel">
-        <h3 class="admin-title">Панели идораĸунӣ</h3>
-        <div class="admin-stats">Умумии ĸорбарон: <span id="total-users">0</span></div>
+        <h3 class="admin-title">Панели идоракунӣ</h3>
+        <div class="admin-stats">Умумии корбарон: <span id="total-users">0</span></div>
         <div class="admin-stats">Тестҳои анҷомдода: <span id="total-tests">0</span></div>
         <div class="admin-stats">Тестҳои гузашта: <span id="passed-tests">0</span></div>
         <div class="admin-stats">Тестҳои нагузашта: <span id="failed-tests">0</span></div>
@@ -890,44 +886,44 @@
             <!-- User stats will be displayed here -->
         </div>
         
-        <button class="admin-btn" id="add-words-btn">Иловаи ĸалима</button>
+        <button class="admin-btn" id="add-words-btn">Иловаи калима</button>
         <button class="admin-btn" id="logout-btn">Баромадан</button>
     </div>
     
     <div class="container">
         <!-- Header -->
         <div class="header">
-            <div class="panda-icon"> </div>
+            <div class="panda-icon">🐼</div>
             <h1>Panda & Mina</h1>
-            <div class="bunny-icon"> </div>
-            <div class="subtitle">Тарҷумаи ĸалимаҳо аз тоҷиĸӣ ба англисӣ</div>
+            <div class="bunny-icon">🐰</div>
+            <div class="subtitle">Тарҷумаи калимаҳо аз тоҷикӣ ба англисӣ</div>
         </div>
         
         <!-- Unit Selection Screen -->
         <div class="unit-selection" id="unit-selection">
             <button class="unit-btn" id="unit4-btn">
                 Unite 4
-                <span>50 ĸалимаи асосӣ</span>
+                <span>50 калимаи асосӣ</span>
             </button>
             <button class="unit-btn" id="unit5-btn">
                 Unite 5
-                <span>50 ĸалимаи асосӣ</span>
+                <span>50 калимаи асосӣ</span>
             </button>
             <button class="unit-btn" id="unit4-end-btn">
                 Unite 4 охир
-                <span>50 ĸалимаи иловагӣ</span>
+                <span>50 калимаи иловагӣ</span>
             </button>
             <button class="unit-btn" id="unit5-end-btn">
                 Unite 5 охир
-                <span>50 ĸалимаи иловагӣ</span>
+                <span>50 калимаи иловагӣ</span>
             </button>
             <button class="unit-btn" id="practice-btn">
-                Праĸтиĸа
+                Практика
                 <span>Калимаҳо аз юнитҳо</span>
             </button>
             <button class="unit-btn" id="unit6-btn">
                 Unite 6
-                <span>50 ĸалимаи нав</span>
+                <span>50 калимаи нав</span>
             </button>
         </div>
         
@@ -941,13 +937,12 @@
             </div>
             
             <div class="word-display" id="word-display">
-                <div id="tajik-word">ĸӯдаĸ</div>
-                <div class="russian-translation" id="russian-word">ребёноĸ</div>
+                <div id="tajik-word">кӯдак</div>
+                <div class="russian-translation" id="russian-word">ребёнок</div>
             </div>
             
             <div class="answer-container">
-                <input type="text" id="answer" placeholder="Навишед ба англисӣ..." 
-autocomplete="off">
+                <input type="text" id="answer" placeholder="Навишед ба англисӣ..." autocomplete="off">
             </div>
             
             <button class="continue-btn" id="continue-btn" disabled>Идома додан</button>
@@ -955,18 +950,15 @@ autocomplete="off">
         
         <!-- Practice Screen -->
         <div class="practice-screen" id="practice-screen">
-            <div class="practice-word" id="practice-word">ĸӯдаĸ</div>
-            <div class="practice-translation" id="practice-translation">ребёноĸ</div>
+            <div class="practice-word" id="practice-word">кӯдак</div>
+            <div class="practice-translation" id="practice-translation">ребёнок</div>
             
             <div class="voice-recording">
                 <button class="record-btn" id="record-btn">Сохтани ҷумла бо овоз</button>
                 <audio controls class="audio-player" id="audio-player"></audio>
             </div>
             
-            <input type="text" class="sentence-input" id="sentence-input" placeholder="Ҷумлаи 
-худро бо ин ĸалима нависед...">
-            
-            <div class="sentence-feedback" id="sentence-feedback">
+            <input type="text" class="sentence-input" id="sentence-input" placeholder="Ҷумлаи худро бо ин калима нависед..."><div class="sentence-feedback" id="sentence-feedback">
                 <div id="feedback-text"></div>
                 <div class="sentence-correct-answer" id="correct-sentence"></div>
             </div>
@@ -983,20 +975,16 @@ autocomplete="off">
             <h2 class="results-title">Натиҷаҳои тест</h2>
             
             <div class="stats-container">
-                <div class="stat-item">Шумо <span class="stat-value" id="score">45</span> аз <span 
-class="stat-value">50</span>-ро дуруст ҷавоб додед</div>
-                <div class="stat-item">Фоизи дурустӣ: <span class="stat-value" 
-id="percentage">90%</span></div>
-                <div class="stat-item">Миқдори хатоҳо: <span class="stat-value" id="mistakes
-count">5</span></div>
+                <div class="stat-item">Шумо <span class="stat-value" id="score">45</span> аз <span class="stat-value">50</span>-ро дуруст ҷавоб додед</div>
+                <div class="stat-item">Фоизи дурустӣ: <span class="stat-value" id="percentage">90%</span></div>
+                <div class="stat-item">Миқдори хатоҳо: <span class="stat-value" id="mistakes-count">5</span></div>
             </div>
             
-            <div class="message" id="message">Аъло! Шумо моҳири забони англисӣ ҳастед! </
- div>
+            <div class="message" id="message">Аъло! Шумо моҳири забони англисӣ ҳастед! 👏</div>
             <div class="panda-message" id="panda-message"></div>
             
             <div class="results-buttons">
-                <button class="result-btn" id="restart-btn">Аз нав сар ĸардан</button>
+                <button class="result-btn" id="restart-btn">Аз нав сар кардан</button>
                 <button class="result-btn" id="show-errors-btn">Хатоҳоро нигаред</button>
             </div>
             
@@ -1006,301 +994,269 @@ count">5</span></div>
             </div>
         </div>
     </div>
+
     <script>
         // Vocabulary for all units with Russian translations
         const units = {
             "Unite 4": [
                 {tajik: "хориҷа", english: "abroad", russian: "за границей"},
-                {tajik: "қабул ĸардан", english: "accept", russian: "принимать"},
-                {tajik: "ба фарзанд қабул ĸардан", english: "adopted", russian: "усыновленный"},
-                {tajik: "ĸондиционер", english: "air conditioner", russian: "ĸондиционер"},
+                {tajik: "қабул кардан", english: "accept", russian: "принимать"},
+                {tajik: "ба фарзанд қабул кардан", english: "adopted", russian: "усыновленный"},
+                {tajik: "кондиционер", english: "air conditioner", russian: "кондиционер"},
                 {tajik: "таъсирбахш, ҳайратангез", english: "awesome", russian: "потрясающий"},
                 {tajik: "зарба задан", english: "bang", russian: "стучать"},
-                {tajik: "шашлиĸ ĸардан", english: "barbecued", russian: "гриль"},
+                {tajik: "шашлик кардан", english: "barbecued", russian: "гриль"},
                 {tajik: "монеа", english: "barrier", russian: "барьер"},
                 {tajik: "ванна", english: "bath", russian: "ванна"},
                 {tajik: "талбидан", english: "beg", russian: "просить"},
                 {tajik: "гадо", english: "beggar", russian: "нищий"},
-                {tajik: "оилаи биологӣ", english: "birth family", russian: "биологичесĸая семья"},
+                {tajik: "оилаи биологӣ", english: "birth family", russian: "биологическая семья"},
                 {tajik: "блог", english: "blog", russian: "блог"},
                 {tajik: "савор шудан", english: "board", russian: "садиться (на транспорт)"},
                 {tajik: "рафиқ", english: "buddy", russian: "приятель"},
                 {tajik: "пасту баланд (дар роҳ)", english: "bumpy", russian: "ухабистый"},
-                {tajik: "эҳтиётĸор", english: "careful", russian: "осторожный"},
-                {tajik: "хрустĸунанда", english: "crisp", russian: "хрустящий"},
+                {tajik: "эҳтиёткор", english: "careful", russian: "осторожный"},
+                {tajik: "хрусткунанда", english: "crisp", russian: "хрустящий"},
                 {tajik: "мурда", english: "dead", russian: "мертвый"},
                 {tajik: "хоҳиш", english: "desire", russian: "желание"},
                 {tajik: "ноумедӣ", english: "disappointment", russian: "разочарование"},
                 {tajik: "нафрат, бадбинӣ", english: "dislike", russian: "неприязнь"},
-                {tajik: "тормоздиҳӣ, ĸашолаĸунии дилгир", english: "drag", russian: "тянуть"},
+                {tajik: "тормоздиҳӣ, кашолакунии дилгир", english: "drag", russian: "тянуть"},
                 {tajik: "даромадан, ҳамроҳ шудан", english: "drop in", russian: "заглянуть"},
-                {tajik: "студияи сабти садо ва видео", english: "recording studio", russian: "студия 
-звуĸозаписи"},
-                {tajik: "хотиррасон ĸардан", english: "remind", russian: "напоминать"},
+                {tajik: "студияи сабти садо ва видео", english: "recording studio", russian: "студия звукозаписи"},{tajik: "хотиррасон кардан", english: "remind", russian: "напоминать"},
                 {tajik: "шӯҳрат, обрӯ", english: "reputation", russian: "репутация"},
-                {tajik: "чаппагардон ĸардан", english: "reverse", russian: "разворачивать"},
+                {tajik: "чаппагардон кардан", english: "reverse", russian: "разворачивать"},
                 {tajik: "вазн, усули мусиқӣ", english: "rhythm", russian: "ритм"},
-                {tajik: "рост, ҳақонӣ (дар сиёсат)", english: "right-wing", russian: "правый (политиĸа)"},
-                {tajik: "исён, сарĸашӣ", english: "riot", russian: "бунт"},
+                {tajik: "рост, ҳақонӣ (дар сиёсат)", english: "right-wing", russian: "правый (политика)"},
+                {tajik: "исён, саркашӣ", english: "riot", russian: "бунт"},
                 {tajik: "давр задан, чархидан", english: "rotate", russian: "вращать"},
                 {tajik: "тахфиф, фурӯши пурра", english: "sell-out", russian: "аншлаг"},
-                {tajik: "сенсационӣ, бошуĸуҳ", english: "sensational", russian: "сенсационный"},
-                {tajik: "шахси ҷолиби ҷинсӣ", english: "sex symbol", russian: "сеĸс-символ"},
+                {tajik: "сенсационӣ, бошукуҳ", english: "sensational", russian: "сенсационный"},
+                {tajik: "шахси ҷолиби ҷинсӣ", english: "sex symbol", russian: "секс-символ"},
                 {tajik: "маъно, мазмун", english: "significance", russian: "значимость"},
                 {tajik: "буридан", english: "slash", russian: "рубить"},
                 {tajik: "намуд, зот", english: "species", russian: "вид"},
                 {tajik: "рехтан", english: "spill", russian: "проливать"},
-                {tajik: "таваққуф, истодагарӣ", english: "standstill", russian: "остановĸа"},
+                {tajik: "таваққуф, истодагарӣ", english: "standstill", russian: "остановка"},
                 {tajik: "мубориза", english: "struggle", russian: "борьба"},
-                {tajik: "зане, ĸи барои ҳуқуқи интихоботӣ мубориза мебарад", english: "suffragette", 
-russian: "суфражистĸа"},
-                {tajik: "тарафдори ҳуқуқи интихобот барои занон", english: "suffragist", russian: 
-"суфражист"},
-                {tajik: "таĸтиĸа", english: "tactic", russian: "таĸтиĸа"},
-                {tajik: "телесĸоп", english: "telescope", russian: "телесĸоп"},
+                {tajik: "зане, ки барои ҳуқуқи интихоботӣ мубориза мебарад", english: "suffragette", russian: "суфражистка"},
+                {tajik: "тарафдори ҳуқуқи интихобот барои занон", english: "suffragist", russian: "суфражист"},
+                {tajik: "тактика", english: "tactic", russian: "тактика"},
+                {tajik: "телескоп", english: "telescope", russian: "телескоп"},
                 {tajik: "назария", english: "theory", russian: "теория"},
                 {tajik: "бехабар", english: "unaware", russian: "не знающий"},
-                {tajik: "аз зер ĸофтан, заиф ĸардан", english: "undermine", russian: "подрывать"},
+                {tajik: "аз зер кофтан, заиф кардан", english: "undermine", russian: "подрывать"},
                 {tajik: "таҳти тафтиш қарор доштан", english: "unverifiable", russian: "непроверяемый"}
             ],
             
             "Unite 5": [
                 {tajik: "донистан, шинохтан", english: "recognize", russian: "узнавать"},
-                {tajik: "боĸимонда", english: "rest of", russian: "остатоĸ"},
+                {tajik: "бокимонда", english: "rest of", russian: "остаток"},
                 {tajik: "дағал", english: "rough", russian: "грубый"},
                 {tajik: "тарсондан", english: "scare", russian: "пугать"},
-                {tajik: "хизмат ĸардан", english: "serve", russian: "служить"},
+                {tajik: "хизмат кардан", english: "serve", russian: "служить"},
                 {tajik: "фарсуда", english: "shabby", russian: "поношенный"},
-                {tajik: "пуст (пучоĸ) ĸардан", english: "shell", russian: "очищать (сĸорлупу)"},
-                {tajik: "харчанг, раĸовина", english: "shell", russian: "раĸовина"},
+                {tajik: "пуст (пучок) кардан", english: "shell", russian: "очищать (скорлупу)"},
+                {tajik: "харчанг, раковина", english: "shell", russian: "раковина"},
                 {tajik: "паноҳ додан", english: "shelter", russian: "убежище"},
-                {tajik: "шоĸ, шахшавӣ", english: "shock", russian: "шоĸ"},
+                {tajik: "шок, шахшавӣ", english: "shock", russian: "шок"},
                 {tajik: "намоиш, шоу", english: "show", russian: "шоу"},
                 {tajik: "нороҳат хобидан", english: "sleeping rough", russian: "спать на улице"},
                 {tajik: "бурон", english: "snowstorm", russian: "метель"},
                 {tajik: "стратегия", english: "strategy", russian: "стратегия"},
                 {tajik: "стресс", english: "stressed", russian: "стресс"},
-                {tajik: "мавқеи пайдоиши тилло (ҷои хуб ёфтан)", english: "struck gold", russian: "найти 
-золотую жилу"},
+                {tajik: "мавқеи пайдоиши тилло (ҷои хуб ёфтан)", english: "struck gold", russian: "найти золотую жилу"},
                 {tajik: "метро", english: "subway", russian: "метро"},
-                {tajik: "фаррош", english: "sweeper", russian: "дворниĸ"},
+                {tajik: "фаррош", english: "sweeper", russian: "дворник"},
                 {tajik: "зуд шав", english: "Swing it!", russian: "Действуй!"},
-                {tajik: "равшан, дурахшон", english: "vivid", russian: "ярĸий"},
+                {tajik: "равшан, дурахшон", english: "vivid", russian: "яркий"},
                 {tajik: "хайрон шудан, саргардон гаштан", english: "wander", russian: "бродить"},
                 {tajik: "шаршара", english: "waterfall", russian: "водопад"},
-                {tajik: "аҷиб", english: "weird", russian: "странный"},
-                {tajik: "хоҳиш", english: "wish", russian: "желание"},
-                {tajik: "хурд ĸардан (масштабро)", english: "zoom down", russian: "уменьшить 
-масштаб"},
-                {tajik: "ҷамъĸунӣ", english: "accumulation", russian: "наĸопление"},
-                {tajik: "сайёҳи пиёдагард", english: "backpacker", russian: "турист с рюĸзаĸом"},
-                {tajik: "манъ ĸардан", english: "ban", russian: "запрещать"},
+                {tajik: "аҷиб", english: "weird", russian: "странный"},{tajik: "хоҳиш", english: "wish", russian: "желание"},
+                {tajik: "хурд кардан (масштабро)", english: "zoom down", russian: "уменьшить масштаб"},
+                {tajik: "ҷамъкунӣ", english: "accumulation", russian: "накопление"},
+                {tajik: "сайёҳи пиёдагард", english: "backpacker", russian: "турист с рюкзаком"},
+                {tajik: "манъ кардан", english: "ban", russian: "запрещать"},
                 {tajik: "моли бозоргир", english: "best-selling", russian: "бестселлер"},
-                {tajik: "вайрон шудан бо таъсири баĸтерия", english: "biodegrade", russian: 
-"биоразлагаться"},
-                {tajik: "саратон", english: "cancer", russian: "раĸ"},
+                {tajik: "вайрон шудан бо таъсири бактерия", english: "biodegrade", russian: "биоразлагаться"},
+                {tajik: "саратон", english: "cancer", russian: "рак"},
                 {tajik: "арзон", english: "cheap", russian: "дешевый"},
-                {tajik: "буғӣ ĸардан, нафасгир шудан", english: "choke", russian: "задыхаться"},
-                {tajik: "боз доштан, ҳараĸатро мушĸил ĸардан", english: "clog", russian: "засорять"},
+                {tajik: "буғӣ кардан, нафасгир шудан", english: "choke", russian: "задыхаться"},
+                {tajik: "боз доштан, ҳаракатро мушкил кардан", english: "clog", russian: "засорять"},
                 {tajik: "наздисоҳилӣ", english: "coastal", russian: "прибрежный"},
                 {tajik: "хати соҳил", english: "coastline", russian: "береговая линия"},
-                {tajik: "шона", english: "comb", russian: "расчесĸа"},
-                {tajik: "фармон додан", english: "command", russian: "ĸоманда"},
-                {tajik: "маҷмӯъ, ĸомплеĸс", english: "complex", russian: "ĸомплеĸс"},
+                {tajik: "шона", english: "comb", russian: "расческа"},
+                {tajik: "фармон додан", english: "command", russian: "команда"},
+                {tajik: "маҷмӯъ, комплекс", english: "complex", russian: "комплекс"},
                 {tajik: "натиҷа", english: "consequence", russian: "последствие"},
-                {tajik: "табиатҳимояĸунанда", english: "conservationist", russian: "эĸолог"},
-                {tajik: "роҳрав, долон", english: "corridor", russian: "ĸоридор"},
+                {tajik: "табиатҳимоякунанда", english: "conservationist", russian: "эколог"},
+                {tajik: "роҳрав, долон", english: "corridor", russian: "коридор"},
                 {tajik: "бе ҳисоб, бениҳоят", english: "countless", russian: "бесчисленный"},
-                {tajik: "достони ҷиноятӣ", english: "crime story", russian: "ĸриминальная история"},
-                {tajik: "гунаҳĸор, ҷиноятĸор", english: "culprit", russian: "виновниĸ"},
-                {tajik: "шиĸастапора, пароĸандапораҳо", english: "debris", russian: "обломĸи"},
-                {tajik: "ҷои таъиншуда", english: "destination", russian: "пунĸт назначения"},
-                {tajik: "вайронĸунанда, харобĸунанда", english: "devastating", russian: 
-"разрушительный"},
-                {tajik: "ошĸор ĸардан", english: "discover", russian: "отĸрывать"},
-                {tajik: "беĸор ĸардан", english: "do away with", russian: "поĸончить с"}
+                {tajik: "достони ҷиноятӣ", english: "crime story", russian: "криминальная история"},
+                {tajik: "гунаҳкор, ҷинояткор", english: "culprit", russian: "виновник"},
+                {tajik: "шикастапора, парокандапораҳо", english: "debris", russian: "обломки"},
+                {tajik: "ҷои таъиншуда", english: "destination", russian: "пункт назначения"},
+                {tajik: "вайронкунанда, харобкунанда", english: "devastating", russian: "разрушительный"},
+                {tajik: "ошкор кардан", english: "discover", russian: "открывать"},
+                {tajik: "бекор кардан", english: "do away with", russian: "покончить с"}
             ],
             
             "Unite 4 охир": [
-                {tajik: "энергияи ҳиссӣ, энергияи эмоционалӣ", english: "emotional energy", russian: 
-"эмоциональная энергия"},
+                {tajik: "энергияи ҳиссӣ, энергияи эмоционалӣ", english: "emotional energy", russian: "эмоциональная энергия"},
                 {tajik: "ҳайратангез, таъсирбахш", english: "fabulous", russian: "невероятный"},
                 {tajik: "хонаи оилавӣ", english: "family home", russian: "семейный дом"},
-                {tajik: "вентилятор, ҳавотозаĸунанда", english: "fan", russian: "вентилятор"},
+                {tajik: "вентилятор, ҳавотозакунанда", english: "fan", russian: "вентилятор"},
                 {tajik: "сарнавиштсоз, тақдирсоз", english: "fateful", russian: "судьбоносный"},
                 {tajik: "тарсидан, ҳарос доштан", english: "fear", russian: "страх"},
-                {tajik: "дар ҳолати хуб будан, қобилияти иҷро ĸарданро доштан", english: "feel up to", 
-russian: "быть в состоянии"},
-                {tajik: "худро таъмин ĸардан, мустақилона зиндагӣ ĸардан", english: "fend for oneself", 
-russian: "самостоятельно заботиться о себе"},
+                {tajik: "дар ҳолати хуб будан, қобилияти иҷро карданро доштан", english: "feel up to", russian: "быть в состоянии"},
+                {tajik: "худро таъмин кардан, мустақилона зиндагӣ кардан", english: "fend for oneself", russian: "самостоятельно заботиться о себе"},
                 {tajik: "расмӣ, муқаррарӣ", english: "formal", russian: "формальный"},
                 {tajik: "ду ҳафта", english: "fortnight", russian: "две недели"},
-                {tajik: "фолбин, ĸасе ĸи тақдирро пешгӯӣ меĸунад", english: "fortune teller", russian: 
-"гадалĸа"},
-                {tajik: "бозии ношоиста, бозии ношаффоф", english: "foul play", russian: "нечестная 
-игра"},
-                {tajik: "ĸасеро фиреб додан, ғолиб шудан бар ĸасе", english: "get the better of", 
-russian: "взять верх"},
-                {tajik: "ĸапидан, доштан", english: "grab", russian: "хватать"},
-                {tajik: "ҳадя ĸардан, додан", english: "grant", russian: "даровать"},
-                {tajik: "фишурдан, мустаҳĸам доштан", english: "grasp", russian: "схватывать"},
+                {tajik: "фолбин, касе ки тақдирро пешгӯӣ мекунад", english: "fortune teller", russian: "гадалка"},
+                {tajik: "бозии ношоиста, бозии ношаффоф", english: "foul play", russian: "нечестная игра"},
+                {tajik: "касеро фиреб додан, ғолиб шудан бар касе", english: "get the better of", russian: "взять верх"},
+                {tajik: "капидан, доштан", english: "grab", russian: "хватать"},
+                {tajik: "ҳадя кардан, додан", english: "grant", russian: "даровать"},{tajik: "фишурдан, мустаҳкам доштан", english: "grasp", russian: "схватывать"},
                 {tajik: "печида гирифтан, чаппа шудан", english: "hang on", russian: "держаться"},
-                {tajik: "бо дили шиĸаста, сахт ғамзада", english: "heartbroken", russian: "с разбитым 
-сердцем"},
-                {tajik: "ҳуҷум ĸардан, зад задан", english: "hit on", russian: "флиртовать"},
-                {tajik: "хоназод, дар хона парваришшуда", english: "home-grown", russian: 
-"домашний"},
+                {tajik: "бо дили шикаста, сахт ғамзада", english: "heartbroken", russian: "с разбитым сердцем"},
+                {tajik: "ҳуҷум кардан, зад задан", english: "hit on", russian: "флиртовать"},
+                {tajik: "хоназод, дар хона парваришшуда", english: "home-grown", russian: "домашний"},
                 {tajik: "ба ватан баргаштан", english: "homecoming", russian: "возвращение домой"},
                 {tajik: "бе хонаву дар, бехона", english: "homeless", russian: "бездомный"},
-                {tajik: "саҳифаи хонагӣ (дар интернет)", english: "homepage", russian: "домашняя 
-страница"},
+                {tajik: "саҳифаи хонагӣ (дар интернет)", english: "homepage", russian: "домашняя страница"},
                 {tajik: "зодгоҳ, шаҳри модарӣ", english: "hometown", russian: "родной город"},
                 {tajik: "савор шудан (ба мошин)", english: "hop in", russian: "запрыгнуть"},
                 {tajik: "сарҳад, маҳдудият", english: "bound", russian: "граница"},
                 {tajik: "гарам, самимӣ", english: "warming", russian: "потепление"},
-                {tajik: "растании хонагӣ", english: "house plant", russian: "ĸомнатное растение"},
+                {tajik: "растании хонагӣ", english: "house plant", russian: "комнатное растение"},
                 {tajik: "ғайрирасмӣ, ғайриформалӣ", english: "informal", russian: "неформальный"},
-                {tajik: "яĸ навъ, яĸ хел", english: "kind of", russian: "вроде"},
+                {tajik: "як навъ, як хел", english: "kind of", russian: "вроде"},
                 {tajik: "суғуртаи зиндагӣ", english: "life insurance", russian: "страхование жизни"},
-                {tajik: "бо андозаи воқеӣ, табиӣ", english: "life-size", russian: "в натуральную 
-величину"},
+                {tajik: "бо андозаи воқеӣ, табиӣ", english: "life-size", russian: "в натуральную величину"},
                 {tajik: "умрбод, абадӣ", english: "lifelong", russian: "пожизненный"},
                 {tajik: "монандӣ, мисли", english: "like", russian: "подобно"},
-                {tajik: "холӣ ĸардан (бор), сабуĸӣ додан", english: "load off", russian: "разгрузить"},
+                {tajik: "холӣ кардан (бор), сабукӣ додан", english: "load off", russian: "разгрузить"},
                 {tajik: "бахтатон омад, бахти хуб", english: "lucky you", russian: "тебе повезло"},
-                {tajik: "пул ĸор ĸардан барои зиндагӣ", english: "make a living", russian: "зарабатывать 
-на жизнь"},
-                {tajik: "ĸалон, аълосифат", english: "mega", russian: "мега"},
+                {tajik: "пул кор кардан барои зиндагӣ", english: "make a living", russian: "зарабатывать на жизнь"},
+                {tajik: "калон, аълосифат", english: "mega", russian: "мега"},
                 {tajik: "миля (андозаи масофа)", english: "mile", russian: "миля"},
                 {tajik: "мусс (намуди ширини)", english: "mousse", russian: "мусс"},
-                {tajik: "хоби ĸӯтоҳ, хоб (замони рӯз)", english: "nap", russian: "дремота"},
-                {tajik: "шабаĸа, тор", english: "network", russian: "сеть"},
-                {tajik: "номаълум, машҳур бо сабаби бад", english: "notorious", russian: "печально 
-известный"},
+                {tajik: "хоби кӯтоҳ, хоб (замони рӯз)", english: "nap", russian: "дремота"},
+                {tajik: "шабака, тор", english: "network", russian: "сеть"},
+                {tajik: "номаълум, машҳур бо сабаби бад", english: "notorious", russian: "печально известный"},
                 {tajik: "аввилан, аслан", english: "originally", russian: "изначально"},
-                {tajik: "хонаи ятимон", english: "orphanage", russian: "детсĸий дом"},
-                {tajik: "вафот ĸардан, мурдан", english: "pass away", russian: "сĸончаться"},
-                {tajik: "зебо, дилрабо, хуб", english: "pretty", russian: "ĸрасивый"},
+                {tajik: "хонаи ятимон", english: "orphanage", russian: "детский дом"},
+                {tajik: "вафот кардан, мурдан", english: "pass away", russian: "скончаться"},
+                {tajik: "зебо, дилрабо, хуб", english: "pretty", russian: "красивый"},
                 {tajik: "радиус", english: "radius", russian: "радиус"},
                 {tajik: "роҳи оҳан", english: "railway track", russian: "железнодорожный путь"},
-                {tajik: "қатраи борон", english: "raindrop", russian: "ĸапля дождя"}
+                {tajik: "қатраи борон", english: "raindrop", russian: "капля дождя"}
             ],
             
             "Unite 5 охир": [
-                {tajik: "ĸанор, ĸрай", english: "edge", russian: "ĸрай"},
+                {tajik: "канор, край", english: "edge", russian: "край"},
                 {tajik: "император", english: "emperor", russian: "император"},
                 {tajik: "санъати муҳандисӣ", english: "engineering", russian: "инженерия"},
-                {tajik: "ҳолати фавқулодаи эĸологӣ", english: "environmental emergency", russian: 
-"эĸологичесĸая чрезвычайная ситуация"},
+                {tajik: "ҳолати фавқулодаи экологӣ", english: "environmental emergency", russian: "экологическая чрезвычайная ситуация"},
                 {tajik: "тадқиқотчӣ", english: "explorer", russian: "исследователь"},
                 {tajik: "ҳавопаймои ҷангӣ", english: "fighter plane", russian: "истребитель"},
-                {tajik: "пурĸунанда, даҳана (барои рехтани моеъ)", english: "filler", russian: 
-"наполнитель"},
-                {tajik: "доғ, доғи ĸунҷитаĸ", english: "fleck", russian: "пятнышĸо"},
-                {tajik: "қисм, ĸаср", english: "fraction", russian: "дробь"},
+                {tajik: "пуркунанда, даҳана (барои рехтани моеъ)", english: "filler", russian: "наполнитель"},{tajik: "доғ, доғи кунҷитак", english: "fleck", russian: "пятнышко"},
+                {tajik: "қисм, каср", english: "fraction", russian: "дробь"},
                 {tajik: "пора, порча", english: "fragment", russian: "фрагмент"},
-                {tajik: "ба ĸор шурӯъ ĸардан", english: "get down to", russian: "приступить ĸ"},
-                {tajik: "ĸор, тиҷорат", english: "business", russian: "бизнес"},
+                {tajik: "ба кор шурӯъ кардан", english: "get down to", russian: "приступить к"},
+                {tajik: "кор, тиҷорат", english: "business", russian: "бизнес"},
                 {tajik: "фурӯ бурдан", english: "gobble up", russian: "поглощать"},
-                {tajik: "системаи глобалии муайян ĸардани мавқеъ", english: "GPS (Global Positioning 
-System)", russian: "GPS (глобальная система позиционирования)"},
+                {tajik: "системаи глобалии муайян кардани мавқеъ", english: "GPS (Global Positioning System)", russian: "GPS (глобальная система позиционирования)"},
                 {tajik: "сардард", english: "headache", russian: "головная боль"},
-                {tajik: "марĸази чизе", english: "heart of sth", russian: "суть чего-либо"},
+                {tajik: "маркази чизе", english: "heart of sth", russian: "суть чего-либо"},
                 {tajik: "тосқулоҳ", english: "helmet", russian: "шлем"},
                 {tajik: "хобгоҳи донишҷӯён", english: "hostel", russian: "общежитие"},
-                {tajik: "пуфаĸи ҳавоӣ", english: "hot air balloon", russian: "воздушный шар"},
-                {tajik: "ҷавоҳирот, заргарӣ", english: "jewellery", russian: "уĸрашения"},
-                {tajik: "халтаи ҷутӣ", english: "jute bag", russian: "джутовый мешоĸ"},
-                {tajik: "ĸушанда, марговар", english: "lethal", russian: "смертельный"},
+                {tajik: "пуфаки ҳавоӣ", english: "hot air balloon", russian: "воздушный шар"},
+                {tajik: "ҷавоҳирот, заргарӣ", english: "jewellery", russian: "украшения"},
+                {tajik: "халтаи ҷутӣ", english: "jute bag", russian: "джутовый мешок"},
+                {tajik: "кушанда, марговар", english: "lethal", russian: "смертельный"},
                 {tajik: "партов", english: "litter", russian: "мусор"},
                 {tajik: "талафот", english: "loss", russian: "потеря"},
-                {tajik: "ба муваффақият ноил шудан", english: "make the big time", russian: "добиться 
-большого успеха"},
-                {tajik: "ĸалон, масивӣ", english: "massive", russian: "массивный"},
+                {tajik: "ба муваффақият ноил шудан", english: "make the big time", russian: "добиться большого успеха"},
+                {tajik: "калон, масивӣ", english: "massive", russian: "массивный"},
                 {tajik: "пурпечу хам, роҳравҳои печида", english: "maze", russian: "лабиринт"},
                 {tajik: "тоҷир", english: "merchant", russian: "торговец"},
-                {tajik: "гумроҳĸунанда", english: "misleading", russian: "вводящий в заблуждение"},
-                {tajik: "ĸандаĸорӣ, формовĸа", english: "moulding", russian: "формовĸа"},
-                {tajik: "ĸружĸа", english: "mug", russian: "ĸружĸа"},
-                {tajik: "он чизе, ĸи бояд дида шавад", english: "must-see", russian: "обязательный ĸ 
-просмотру"},
-                {tajik: "моддаи пластиĸӣ (майда, барои истеҳсол)", english: "nurdle", russian: "гранула 
-пластиĸа"},
+                {tajik: "гумроҳкунанда", english: "misleading", russian: "вводящий в заблуждение"},
+                {tajik: "кандакорӣ, формовка", english: "moulding", russian: "формовка"},
+                {tajik: "кружка", english: "mug", russian: "кружка"},
+                {tajik: "он чизе, ки бояд дида шавад", english: "must-see", russian: "обязательный к просмотру"},
+                {tajik: "моддаи пластикӣ (майда, барои истеҳсол)", english: "nurdle", russian: "гранула пластика"},
                 {tajik: "бешарафӣ, беадабӣ", english: "obscenity", russian: "непристойность"},
                 {tajik: "ай ай (баёнгари дард, афсӯс, тарс)", english: "ouch", russian: "ой"},
-                {tajik: "беназорат", english: "out of control", russian: "вне ĸонтроля"},
-                {tajik: "ĸанораҳои шаҳр", english: "outskirts", russian: "оĸраина"},
+                {tajik: "беназорат", english: "out of control", russian: "вне контроля"},
+                {tajik: "канораҳои шаҳр", english: "outskirts", russian: "окраина"},
                 {tajik: "берун аз борт", english: "overboard", russian: "за борт"},
-                {tajik: "хушĸӣ, заминӣ", english: "overland", russian: "по суше"},
+                {tajik: "хушкӣ, заминӣ", english: "overland", russian: "по суше"},
                 {tajik: "вақти изофа", english: "overtime", russian: "сверхурочные"},
-                {tajik: "бастабандӣ", english: "packaging", russian: "упаĸовĸа"},
-                {tajik: "ҷазираи биҳиштӣ", english: "paradise island", russian: "райсĸий остров"},
-                {tajik: "ҷудо ĸардан", english: "part", russian: "расставаться"},
-                {tajik: "тӯбча, шариĸча", english: "pellets", russian: "гранулы"},
-                {tajik: "ёрдамчии шахсӣ", english: "personal assistant", russian: "личный помощниĸ"},
+                {tajik: "бастабандӣ", english: "packaging", russian: "упаковка"},
+                {tajik: "ҷазираи биҳиштӣ", english: "paradise island", russian: "райский остров"},
+                {tajik: "ҷудо кардан", english: "part", russian: "расставаться"},
+                {tajik: "тӯбча, шарикча", english: "pellets", russian: "гранулы"},
+                {tajik: "ёрдамчии шахсӣ", english: "personal assistant", russian: "личный помощник"},
                 {tajik: "хурсанд, розӣ", english: "pleased with", russian: "довольный"},
                 {tajik: "пурсиш", english: "poll", russian: "опрос"},
-                {tajik: "ифлос ĸардан", english: "pollute", russian: "загрязнять"},
+                {tajik: "ифлос кардан", english: "pollute", russian: "загрязнять"},
                 {tajik: "почта, сутунҳо", english: "posts", russian: "сообщения"},
                 {tajik: "тоза, норасида, вайроннашуда", english: "pristine", russian: "нетронутый"}
             ],
             
             "Unite 6": [
-                {tajik: "пляжи пӯшида", english: "private beach", russian: "заĸрытый пляж"},
-                {tajik: "фоида", english: "profit", russian: "выгода"},
-                {tajik: "нашрият", english: "publishing", russian: "издательство"},
-                {tajik: "чоряĸ", english: "quarter", russian: "четверть"},
-                {tajik: "аĸсдиҳӣ", english: "reflection", russian: "отражение"},
+                {tajik: "пляжи пӯшида", english: "private beach", russian: "закрытый пляж"},
+                {tajik: "фоида", english: "profit", russian: "выгода"},{tajik: "нашрият", english: "publishing", russian: "издательство"},
+                {tajik: "чоряк", english: "quarter", russian: "четверть"},
+                {tajik: "аксдиҳӣ", english: "reflection", russian: "отражение"},
                 {tajik: "натиҷа", english: "result", russian: "результат"},
-                {tajik: "ĸорҳои роҳсозӣ", english: "roadwork", russian: "дорожные работы"},
+                {tajik: "корҳои роҳсозӣ", english: "roadwork", russian: "дорожные работы"},
                 {tajik: "роҳ, масир", english: "route", russian: "маршрут"},
-                {tajik: "вайрон ĸардан", english: "ruin", russian: "разрушать"},
+                {tajik: "вайрон кардан", english: "ruin", russian: "разрушать"},
                 {tajik: "сафарӣ", english: "safari", russian: "сафари"},
-                {tajik: "навигатсия", english: "sat nav", russian: "спутниĸовая навигация"},
-                {tajik: "пулаĸча, ченаĸ", english: "scale", russian: "чешуя, шĸала"},
-                {tajik: "хархаша, моҷаро", english: "scandal", russian: "сĸандал"},
+                {tajik: "навигатсия", english: "sat nav", russian: "спутниковая навигация"},
+                {tajik: "пулакча, ченак", english: "scale", russian: "чешуя, шкала"},
+                {tajik: "хархаша, моҷаро", english: "scandal", russian: "скандал"},
                 {tajik: "манзара", english: "scenery", russian: "пейзаж"},
-                {tajik: "ғарқшавӣ бо аĸваланг", english: "scuba diving", russian: "погружение с 
-аĸвалангом"},
-                {tajik: "фиĸри иловагӣ", english: "second thought", russian: "второе мнение"},
+                {tajik: "ғарқшавӣ бо акваланг", english: "scuba diving", russian: "погружение с аквалангом"},
+                {tajik: "фикри иловагӣ", english: "second thought", russian: "второе мнение"},
                 {tajik: "худхизматрасонӣ", english: "self-catering", russian: "самообслуживание"},
                 {tajik: "баромадан (сафар)", english: "set off for", russian: "отправляться"},
-                {tajik: "ҷойҳои тамошобоб", english: "sightseeing", russian: "осмотр 
-достопримечательностей"},
-                {tajik: "шалп-шулп ĸардан", english: "slosh", russian: "хлюпать"},
-                {tajik: "чирĸин ĸардан", english: "soil", russian: "пачĸать"},
-                {tajik: "суръати иҷозатдода", english: "speed limit", russian: "ограничение сĸорости"},
-                {tajik: "вайрон ĸардан", english: "spoil", russian: "портить"},
+                {tajik: "ҷойҳои тамошобоб", english: "sightseeing", russian: "осмотр достопримечательностей"},
+                {tajik: "шалп-шулп кардан", english: "slosh", russian: "хлюпать"},
+                {tajik: "чиркин кардан", english: "soil", russian: "пачкать"},
+                {tajik: "суръати иҷозатдода", english: "speed limit", russian: "ограничение скорости"},
+                {tajik: "вайрон кардан", english: "spoil", russian: "портить"},
                 {tajik: "сарпарастӣ шуда", english: "sponsored", russian: "спонсируемый"},
                 {tajik: "тела додан", english: "spurn", russian: "отвергать"},
                 {tajik: "лағжидан, ҷунбидан", english: "stagger", russian: "шататься"},
-                {tajik: "сайру гашт", english: "stroll", russian: "прогулĸа"},
+                {tajik: "сайру гашт", english: "stroll", russian: "прогулка"},
                 {tajik: "суши", english: "sushi", russian: "суши"},
-                {tajik: "гирд гаштан", english: "swirl", russian: "ĸружиться"},
+                {tajik: "гирд гаштан", english: "swirl", russian: "кружиться"},
                 {tajik: "маъбад", english: "temple", russian: "храм"},
                 {tajik: "пешайвон", english: "terrace", russian: "терраса"},
                 {tajik: "масоҳат", english: "territory", russian: "территория"},
                 {tajik: "подшоҳӣ", english: "the monarchy", russian: "монархия"},
-                {tajik: "ҷомеаи партовӣ", english: "throwaway society", russian: "общество 
-одноразового потребления"},
-                {tajik: "дандонтозаĸунӣ", english: "toothbrush", russian: "зубная щётĸа"},
+                {tajik: "ҷомеаи партовӣ", english: "throwaway society", russian: "общество одноразового потребления"},
+                {tajik: "дандонтозакунӣ", english: "toothbrush", russian: "зубная щётка"},
                 {tajik: "алоқаи тиҷоратӣ", english: "trade link", russian: "торговая связь"},
                 {tajik: "табдил додан", english: "transform", russian: "преобразовать"},
-                {tajik: "халтаи сафар", english: "travel bag", russian: "дорожная сумĸа"},
-                {tajik: "роҳнамо", english: "travel guide", russian: "туристичесĸий гид"},
-                {tajik: "ҷазираи тропиĸӣ", english: "tropical island", russian: "тропичесĸий остров"},
+                {tajik: "халтаи сафар", english: "travel bag", russian: "дорожная сумка"},
+                {tajik: "роҳнамо", english: "travel guide", russian: "туристический гид"},
+                {tajik: "ҷазираи тропикӣ", english: "tropical island", russian: "тропический остров"},
                 {tajik: "фируза (ранг)", english: "turquoise", russian: "бирюзовый"},
                 {tajik: "хос, маъмулии", english: "typical", russian: "типичный"},
                 {tajik: "беҳодиса", english: "uneventful", russian: "без происшествий"},
                 {tajik: "вилла, хона", english: "villa", russian: "вилла"},
                 {tajik: "довталаб, фидоӣ", english: "volunteer", russian: "волонтёр"},
                 {tajik: "исроф, партов", english: "waste", russian: "расточительство"},
-                {tajik: "муҳарриĸи бод", english: "wind turbine", russian: "ветряная турбина"},
+                {tajik: "муҳаррики бод", english: "wind turbine", russian: "ветряная турбина"},
                 {tajik: "дақиқӣ", english: "accuracy", russian: "точность"},
-                {tajik: "огоҳ ĸардан", english: "alert", russian: "предупреждать"},
-                {tajik: "фуромадан (аз нақлиёт)", english: "alight", russian: "сходить"}
+                {tajik: "огоҳ кардан", english: "alert", russian: "предупреждать"},{tajik: "фуромадан (аз нақлиёт)", english: "alight", russian: "сходить"}
             ]
         };
+
         // DOM elements
         const unitSelection = document.getElementById('unit-selection');
         const testScreen = document.getElementById('test-screen');
@@ -1352,6 +1308,7 @@ System)", russian: "GPS (глобальная система позициони�
         const unit5EndBtn = document.getElementById('unit5-end-btn');
         const unit6Btn = document.getElementById('unit6-btn');
         const practiceBtn = document.getElementById('practice-btn');
+
         // State variables
         let currentVocabulary = [];
         let currentWordIndex = 0;
@@ -1365,39 +1322,37 @@ System)", russian: "GPS (глобальная система позициони�
         let mediaRecorder;
         let audioChunks = [];
         let isRecording = false;
-        //
- Data storage
-        let appData = {
-            users: {},
+        
+        // Data storage
+        let appData = {users: {},
             tests: []
         };
-        //
- Load data from localStorage
+
+        // Load data from localStorage
         function loadData() {
- (savedData) {
             const savedData = localStorage.getItem('vocabularyTrainerData');
-            if
+            if (savedData) {
                 appData = JSON.parse(savedData);
             }
         }
-        //
- Save data to localStorage
+        
+        // Save data to localStorage
         function saveData() {
- localStorage.setItem('vocabularyTrainerData', JSON.stringify(appData));
+            localStorage.setItem('vocabularyTrainerData', JSON.stringify(appData));
         }
-        //
- Initialize data and show unit selection immediately
+        
+        // Initialize data and show unit selection immediately
         loadData();
- loginScreen.style.display = 'none';
- unitSelection.style.display = 'grid';
-        //
- Login functionality
- function checkLogin() {
+        loginScreen.style.display = 'none';
+        unitSelection.style.display = 'grid';
+
+        // Login functionality
+        function checkLogin() {
             const username = usernameInput.value.trim();
             const password = passwordInput.value.trim();
             
             if (!username || !password) {
-                loginError.textContent = "Лутфан ҳамаи майдонҳоро пур ĸунед!";
+                loginError.textContent = "Лутфан ҳамаи майдонҳоро пур кунед!";
                 loginError.style.display = 'block';
                 return;
             }
@@ -1488,14 +1443,13 @@ System)", russian: "GPS (глобальная система позициони�
         function addNewWords() {
             if (!isAdmin) return;
             
-            const unit = prompt("Барои ĸадом юнит мехоҳед ĸалима илова ĸунед? (Unite 4, Unite 5, 
-Unite 4 охир, Unite 5 охир, Unite 6)");
+            const unit = prompt("Барои кадом юнит мехоҳед калима илова кунед? (Unite 4, Unite 5, Unite 4 охир, Unite 5 охир, Unite 6)");
             if (!unit || !units[unit]) {
                 alert("Номи юнит нодуруст!");
                 return;
             }
             
-            const tajik = prompt("Калимаи тоҷиĸӣ:");
+            const tajik = prompt("Калимаи тоҷикӣ:");
             const english = prompt("Калимаи англисӣ:");
             const russian = prompt("Тарҷумаи русӣ:");
             
@@ -1503,7 +1457,7 @@ Unite 4 охир, Unite 5 охир, Unite 6)");
                 units[unit].push({tajik, english, russian});
                 alert("Калима бо муваффақият илова шуд!");
             } else {
-                alert("Лутфан ҳамаи майдонҳоро пур ĸунед!");
+                alert("Лутфан ҳамаи майдонҳоро пур кунед!");
             }
         }
         
@@ -1516,6 +1470,7 @@ Unite 4 охир, Unite 5 охир, Unite 6)");
         unit5EndBtn.addEventListener('click', () => startUnit("Unite 5 охир"));
         unit6Btn.addEventListener('click', () => startUnit("Unite 6"));
         practiceBtn.addEventListener('click', startPractice);
+
         // Start selected unit
         function startUnit(unitName) {
             selectedUnit = unitName;
@@ -1540,6 +1495,7 @@ Unite 4 охир, Unite 5 охир, Unite 6)");
                 answerInput.focus();
             }, 100);
         }
+
         // Start practice mode
         function startPractice() {
             // Combine all units for practice
@@ -1560,6 +1516,7 @@ Unite 4 охир, Unite 5 охир, Unite 6)");
             
             showPracticeWord();
         }
+
         // Show current word in practice mode
         function showPracticeWord() {
             if (currentWordIndex < currentVocabulary.length) {
@@ -1569,6 +1526,7 @@ Unite 4 охир, Unite 5 охир, Unite 6)");
                 sentenceFeedback.style.display = 'none';
             }
         }
+
         // Check user's sentence in practice mode
         function checkSentence() {
             const userSentence = sentenceInput.value.trim();
@@ -1580,22 +1538,19 @@ Unite 4 охир, Unite 5 охир, Unite 6)");
             // Simple check - just see if the English word is included
             // In a real app, you'd want more sophisticated NLP here
             const englishWord = currentVocabulary[currentWordIndex].english.toLowerCase();
-            const includesWord = userSentence.toLowerCase().includes(englishWord);
-            
-            if (includesWord) {
-                feedbackText.textContent = "Ҷумлаи шумо дуруст аст! ";
+            const includesWord = userSentence.toLowerCase().includes(englishWord);if (includesWord) {
+                feedbackText.textContent = "Ҷумлаи шумо дуруст аст! 👍";
                 sentenceFeedback.className = "sentence-feedback sentence-correct";
                 correctSentence.textContent = "";
             } else {
-                feedbackText.textContent = "Ҷумлаи шумо нодуруст аст. Калимаи англисӣ бояд дар 
-ҷумла ишора шавад.";
+                feedbackText.textContent = "Ҷумлаи шумо нодуруст аст. Калимаи англисӣ бояд дар ҷумла ишора шавад.";
                 sentenceFeedback.className = "sentence-feedback sentence-incorrect";
-                correctSentence.textContent = `Мисол: "I like to $
- {currentVocabulary[currentWordIndex].english} every day"`;
+                correctSentence.textContent = `Мисол: "I like to ${currentVocabulary[currentWordIndex].english} every day"`;
             }
             
             sentenceFeedback.style.display = 'block';
         }
+
         // Voice recording functionality
         async function toggleRecording() {
             if (!isRecording) {
@@ -1621,7 +1576,7 @@ Unite 4 охир, Unite 5 охир, Unite 6)");
                     recordBtn.classList.add('recording');
                 } catch (err) {
                     console.error("Error recording audio:", err);
-                    alert("Имĸони сабти овоз дастрас нест. Лутфан иҷозат диҳед.");
+                    alert("Имкони сабти овоз дастрас нест. Лутфан иҷозат диҳед.");
                 }
             } else {
                 mediaRecorder.stop();
@@ -1633,19 +1588,20 @@ Unite 4 охир, Unite 5 охир, Unite 6)");
                 mediaRecorder.stream.getTracks().forEach(track => track.stop());
             }
         }
+
         // Show current word
         function showWord() {
             if (currentWordIndex < currentVocabulary.length) {
                 tajikWordDisplay.textContent = currentVocabulary[currentWordIndex].tajik;
                 russianWordDisplay.textContent = currentVocabulary[currentWordIndex].russian;
                 answerInput.value = '';
-                progressDisplay.textContent = `Калима: ${currentWordIndex+1}/$
-{currentVocabulary.length}`;
+                progressDisplay.textContent = `Калима: ${currentWordIndex+1}/${currentVocabulary.length}`;
                 
                 // Disable continue button until user types something
                 continueBtn.disabled = true;
             }
         }
+
         // Next word
         function nextWord() {
             const userAnswer = answerInput.value.trim().toLowerCase();
@@ -1671,13 +1627,13 @@ Unite 4 охир, Unite 5 охир, Unite 6)");
                 finishGame();
             }
         }
+
         // Timer
         function startTimer() {
             clearInterval(timer);
             updateTimerDisplay();
             
-            timer = setInterval(() => {
-                timeLeft--;
+            timer = setInterval(() => {timeLeft--;
                 updateTimerDisplay();
                 
                 if (timeLeft <= 0) {
@@ -1690,6 +1646,7 @@ Unite 4 охир, Unite 5 охир, Unite 6)");
             // Display only seconds
             timerDisplay.textContent = timeLeft;
         }
+
         // Finish game
         function finishGame() {
             clearInterval(timer);
@@ -1726,18 +1683,18 @@ Unite 4 охир, Unite 5 охир, Unite 6)");
             
             // Set regular message based on percentage
             if (percentage >= 90) {
-                messageDisplay.textContent = "Аъло! Шумо моҳири забони англисӣ ҳастед! ";
+                messageDisplay.textContent = "Аъло! Шумо моҳири забони англисӣ ҳастед! 👏";
             } else if (percentage >= 70) {
-                messageDisplay.textContent = "Хуб! Натиҷаи хуб! ";
+                messageDisplay.textContent = "Хуб! Натиҷаи хуб! 👍";
             } else {
-                messageDisplay.textContent = "Талош ĸунед, боз ҳам метавонед беҳтар! ";
+                messageDisplay.textContent = "Талош кунед, боз ҳам метавонед беҳтар! 💪";
             }
             
             // Set Panda message based on score (42+ or less)
             if (score >= 42) {
-                pandaMessageDisplay.textContent = "Mina Panda loves you! ";
+                pandaMessageDisplay.textContent = "Mina Panda loves you! 🐼❤️";
             } else {
-                pandaMessageDisplay.textContent = "Don't worry, Panda is with you! ";
+                pandaMessageDisplay.textContent = "Don't worry, Panda is with you! 🐼🤗";
             }
             
             testScreen.style.display = 'none';
@@ -1749,13 +1706,14 @@ Unite 4 охир, Unite 5 охир, Unite 6)");
                 updateAdminStats();
             }
         }
+
         // Show errors
         function showErrors() {
             if (errorsContainer.style.display === 'none') {
                 let errorsHTML = '';
                 
                 if (mistakes.length === 0) {
-                    errorsHTML = '<p>Шумо ягон хато надоштед! </p>';
+                    errorsHTML = '<p>Шумо ягон хато надоштед! 👏</p>';
                 } else {
                     mistakes.forEach((mistake, index) => {
                         errorsHTML += `
@@ -1770,12 +1728,13 @@ Unite 4 охир, Unite 5 охир, Unite 6)");
                 
                 errorsContainer.innerHTML = errorsHTML;
                 errorsContainer.style.display = 'block';
-                showErrorsBtn.textContent = "Пинҳон ĸардани хатоҳо";
+                showErrorsBtn.textContent = "Пинҳон кардани хатоҳо";
             } else {
                 errorsContainer.style.display = 'none';
                 showErrorsBtn.textContent = "Хатоҳоро нигаред";
             }
         }
+
         // Event listeners
         continueBtn.addEventListener('click', nextWord);
         
@@ -1822,5 +1781,5 @@ Unite 4 охир, Unite 5 охир, Unite 6)");
             }
         }
     </script>
- </body>
- </html>
+</body>
+</html>
