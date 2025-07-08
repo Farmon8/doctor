@@ -1,1 +1,1869 @@
+<!DOCTYPE html>
+<html lang="tg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panda & Mina - Vocabulary Trainer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Nunito', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #ffd1dc, #a2d2ff);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* Header Styles */
+        .header {
+            background: linear-gradient(to right, #ff6b9d, #ff8fb1);
+            padding: 25px 0;
+            text-align: center;
+            position: relative;
+            border-bottom: 3px solid #ff4a87;
+        }
+        
+        .header h1 {
+            font-size: 3.2rem;
+            color: #2d3047;
+            font-weight: 800;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        
+        .header .subtitle {
+            font-size: 1.2rem;
+            color: #2d3047;
+            font-weight: 600;
+        }
+        
+        .panda-icon, .bunny-icon {
+            font-size: 3.5rem;
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0 15px;
+            filter: drop-shadow(0 3px 5px rgba(0,0,0,0.2));
+        }
+        
+        /* Unit Selection */
+        .unit-selection {
+            padding: 30px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            background: linear-gradient(145deg, #f8f9ff, #e6f0ff);
+        }
+        
+        .unit-btn {
+            background: linear-gradient(145deg, #4cc9f0, #4361ee);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 25px 15px;
+            font-size: 1.6rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 15px rgba(67, 97, 238, 0.4);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 180px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .unit-btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: 0.5s;
+        }
+        
+        .unit-btn:hover::before {
+            left: 100%;
+        }
+        
+        .unit-btn:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 12px 20px rgba(67, 97, 238, 0.5);
+            background: linear-gradient(145deg, #4895ef, #3f37c9);
+        }
+        
+        .unit-btn span {
+            font-size: 1rem;
+            margin-top: 10px;
+            font-weight: 500;
+            opacity: 0.9;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        /* Test Screen */
+        .test-screen {
+            padding: 30px;
+            display: none;
+            background: linear-gradient(145deg, #f8f9ff, #e6f0ff);
+        }
+        
+        .test-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .progress-container {
+            background: linear-gradient(to right, #ffacc7, #ff85a2);
+            border-radius: 50px;
+            padding: 10px 25px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #2d3047;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            min-width: 180px;
+            text-align: center;
+        }
+        
+        .timer-container {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(145deg, #ff85a2, #ff5c8d);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 15px rgba(255, 92, 141, 0.4);
+            position: relative;
+            border: 3px solid white;
+        }
+        
+        .timer {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .word-display {
+            background: linear-gradient(to right, #f9f9f9, #ffffff);
+            border-radius: 20px;
+            padding: 40px 20px;
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-align: center;
+            margin: 30px 0;
+            color: #2d3047;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            border: 2px solid #ffacc7;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .russian-translation {
+            font-size: 1.4rem;
+            color: #4361ee;
+            margin-top: 15px;
+            font-style: italic;
+            font-weight: 600;
+        }
+        
+        .word-display.correct {
+            background: linear-gradient(to right, #d4edda, #c3e6cb);
+            border-color: #28a745;
+        }
+        
+        .word-display.incorrect {
+            background: linear-gradient(to right, #f8d7da, #f5c6cb);
+            border-color: #dc3545;
+        }
+        
+        .answer-container {
+            margin: 20px 0 30px;
+            position: relative;
+        }
+        
+        #answer {
+            width: 100%;
+            padding: 18px 25px;
+            font-size: 1.4rem;
+            border: none;
+            border-radius: 50px;
+            text-align: center;
+            background: #f0f5ff;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 2px solid #cce5ff;
+        }
+        
+        #answer:focus {
+            outline: none;
+            box-shadow: 0 5px 20px rgba(67, 97, 238, 0.3);
+            background: white;
+            border-color: #80bdff;
+        }
+        
+        .continue-btn {
+            background: linear-gradient(to right, #ff5c8d, #ff85a2);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 1.4rem;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 20px auto;
+            display: block;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 15px rgba(255, 92, 141, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .continue-btn::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255,255,255,0.1);
+            transform: rotate(30deg);
+            transition: all 0.6s ease;
+        }
+        
+        .continue-btn:hover::after {
+            transform: rotate(30deg) translate(20%, 20%);
+        }
+        
+        .continue-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(255, 92, 141, 0.5);
+        }
+        
+        .continue-btn:disabled {
+            background: linear-gradient(to right, #cccccc, #999999) !important;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+            opacity: 0.7;
+        }
+        
+        .continue-btn:disabled:hover {
+            transform: none !important;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+        }
+        
+        /* Results Screen */
+        .results-screen {
+            padding: 30px;
+            display: none;
+            background: linear-gradient(145deg, #f8f9ff, #e6f0ff);
+        }
+        
+        .results-title {
+            text-align: center;
+            font-size: 2.2rem;
+            color: #ff5c8d;
+            margin-bottom: 30px;
+            font-weight: 800;
+            text-shadow: 0 2px 3px rgba(0,0,0,0.1);
+        }
+        
+        .stats-container {
+            background: linear-gradient(to right, #e0f7fa, #f8f9fa);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            border: 2px solid #ffacc7;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stats-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, #ff5c8d, #4cc9f0);
+        }
+        
+        .stat-item {
+            font-size: 1.5rem;
+            margin: 15px 0;
+            color: #2d3047;
+            text-align: center;
+            padding: 8px 0;
+            border-bottom: 1px dashed #ffacc7;
+        }
+        
+        .stat-value {
+            font-weight: 800;
+            color: #ff5c8d;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .message {
+            font-size: 1.8rem;
+            text-align: center;
+            margin: 25px 0;
+            color: #3f37c9;
+            font-weight: 700;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 2px solid #ffacc7;
+        }
+        
+        .panda-message {
+            font-size: 2rem;
+            text-align: center;
+            margin: 25px 0;
+            color: #ff5c8d;
+            font-weight: 800;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 2px solid #4361ee;
+        }
+        
+        .results-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .result-btn {
+            background: linear-gradient(to right, #4cc9f0, #4361ee);
+            color: white;
+            border: none;
+            padding: 18px 35px;
+            font-size: 1.3rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 15px rgba(67, 97, 238, 0.4);
+            min-width: 250px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .result-btn::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255,255,255,0.1);
+            transform: rotate(30deg);
+            transition: all 0.6s ease;
+        }
+        
+        .result-btn:hover::after {
+            transform: rotate(30deg) translate(20%, 20%);
+        }
+        
+        .result-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(67, 97, 238, 0.5);
+        }
+        
+        .errors-container {
+            display: none;
+            margin-top: 30px;
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            border: 2px solid #ffacc7;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .error-title {
+            text-align: center;
+            font-size: 1.8rem;
+            color: #ff5c8d;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .error-item {
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 15px;
+            background: #f8f9fa;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid #ff5c8d;
+            transition: all 0.3s ease;
+        }
+        
+        .error-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .error-tajik {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2d3047;
+        }
+        
+        .correct-answer {
+            font-size: 1.3rem;
+            color: #4361ee;
+            margin-top: 8px;
+            font-weight: 600;
+        }
+        
+        .user-answer {
+            font-size: 1.3rem;
+            color: #ff5c8d;
+            margin-top: 5px;
+            font-style: italic;
+        }
+        
+        /* Login Screen */
+        .login-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .login-box {
+            background: linear-gradient(135deg, #ffd1dc, #a2d2ff);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+        
+        .login-title {
+            font-size: 2.2rem;
+            color: #2d3047;
+            margin-bottom: 25px;
+            font-weight: 800;
+        }
+        
+        .login-input {
+            width: 100%;
+            padding: 15px 20px;
+            margin: 12px 0;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .login-input:focus {
+            outline: none;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+        
+        .login-btn {
+            background: linear-gradient(to right, #ff5c8d, #ff85a2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 15px rgba(255, 92, 141, 0.4);
+            width: 100%;
+        }
+        
+        .login-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 92, 141, 0.5);
+        }
+        
+        .login-error {
+            color: #ff1a1a;
+            margin-top: 15px;
+            font-weight: 600;
+            display: none;
+        }
+        
+        /* Admin Panel */
+        .admin-panel {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 100;
+            display: none;
+            max-width: 300px;
+        }
+        
+        .admin-title {
+            font-size: 1.4rem;
+            color: #ff5c8d;
+            margin-bottom: 10px;
+            font-weight: 700;
+            text-align: center;
+        }
+        
+        .admin-stats {
+            margin: 10px 0;
+            font-size: 1.1rem;
+            color: #2d3047;
+        }
+        
+        .admin-btn {
+            background: linear-gradient(to right, #4cc9f0, #4361ee);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            margin: 5px;
+            width: 100%;
+        }
+        
+        .user-stats-container {
+            max-height: 200px;
+            overflow-y: auto;
+            margin: 10px 0;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .user-stat-item {
+            padding: 8px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 0.9rem;
+        }
+        
+        /* Flower Decorations */
+        .flower {
+            position: absolute;
+            z-index: -1;
+            opacity: 0.3;
+            filter: blur(1px);
+        }
+        
+        .flower-1 {
+            top: 10%;
+            left: 5%;
+            font-size: 3rem;
+            color: #ff85a2;
+            transform: rotate(15deg);
+        }
+        
+        .flower-2 {
+            top: 15%;
+            right: 7%;
+            font-size: 2.5rem;
+            color: #4cc9f0;
+            transform: rotate(-20deg);
+        }
+        
+        .flower-3 {
+            bottom: 20%;
+            left: 8%;
+            font-size: 2rem;
+            color: #ff5c8d;
+            transform: rotate(30deg);
+        }
+        
+        .flower-4 {
+            bottom: 15%;
+            right: 10%;
+            font-size: 2.8rem;
+            color: #4361ee;
+            transform: rotate(-15deg);
+        }
+        
+        /* Practice Screen */
+        .practice-screen {
+            padding: 30px;
+            display: none;
+            background: linear-gradient(145deg, #f8f9ff, #e6f0ff);
+            position: relative;
+        }
+        
+        .practice-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .practice-title {
+            font-size: 1.8rem;
+            color: #4361ee;
+            font-weight: 700;
+        }
+        
+        .practice-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+        
+        .word-image-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+            max-width: 600px;
+        }
+        
+        .word-image {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border: 3px solid white;
+            transition: transform 0.3s ease;
+        }
+        
+        .word-image:hover {
+            transform: scale(1.02);
+        }
+        
+        .word-info {
+            text-align: center;
+            width: 100%;
+        }
+        
+        .practice-word {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #2d3047;
+            margin-bottom: 10px;
+        }
+        
+        .practice-translation {
+            font-size: 1.5rem;
+            color: #4361ee;
+            font-style: italic;
+            font-weight: 600;
+        }
+        
+        .practice-english {
+            font-size: 1.8rem;
+            color: #ff5c8d;
+            font-weight: 700;
+            margin: 15px 0;
+        }
+        
+        .sentence-section {
+            width: 100%;
+            max-width: 600px;
+        }
+        
+        .sentence-instruction {
+            font-size: 1.2rem;
+            color: #2d3047;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .sentence-input {
+            width: 100%;
+            padding: 18px 25px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            text-align: center;
+            background: #f0f5ff;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 2px solid #cce5ff;
+            margin-bottom: 20px;
+        }
+        
+        .sentence-input:focus {
+            outline: none;
+            box-shadow: 0 5px 20px rgba(67, 97, 238, 0.3);
+            background: white;
+            border-color: #80bdff;
+        }
+        
+        .voice-recording {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px 0;
+            width: 100%;
+        }
+        
+        .record-btn {
+            background: linear-gradient(to right, #ff5c8d, #ff85a2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 15px rgba(255, 92, 141, 0.4);
+            margin: 10px 0;
+            width: 100%;
+            max-width: 300px;
+        }
+        
+        .record-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 92, 141, 0.5);
+        }
+        
+        .record-btn.recording {
+            background: linear-gradient(to right, #dc3545, #c82333);
+            animation: pulse 1.5s infinite;
+        }
+        
+        .audio-player {
+            margin: 15px 0;
+            display: none;
+            width: 100%;
+            max-width: 300px;
+        }
+        
+        .sentence-feedback {
+            font-size: 1.4rem;
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 15px;
+            display: none;
+            width: 100%;
+        }
+        
+        .sentence-correct {
+            background-color: #d4edda;
+            color: #155724;
+            border: 2px solid #c3e6cb;
+        }
+        
+        .sentence-incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 2px solid #f5c6cb;
+        }
+        
+        .sentence-correct-answer {
+            font-size: 1.3rem;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+        
+        .highlight-error {
+            color: #dc3545;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+        
+        .example-sentence {
+            font-size: 1.2rem;
+            color: #4361ee;
+            font-style: italic;
+            margin-top: 15px;
+        }
+        
+        .practice-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+        
+        .practice-btn {
+            background: linear-gradient(to right, #4cc9f0, #4361ee);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 15px rgba(67, 97, 238, 0.4);
+            min-width: 200px;
+        }
+        
+        .practice-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(67, 97, 238, 0.5);
+        }
+        
+        .pronunciation-feedback {
+            font-size: 1.3rem;
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+            display: none;
+        }
+        
+        .pronunciation-correct {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .pronunciation-incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        .pronunciation-hint {
+            font-size: 1.1rem;
+            margin-top: 10px;
+            font-style: italic;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .unit-btn {
+                height: 150px;
+                font-size: 1.4rem;
+            }
+            
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .panda-icon, .bunny-icon {
+                font-size: 2.8rem;
+            }
+            
+            .test-header {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            
+            .results-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .result-btn {
+                width: 100%;
+            }
+            
+            .timer-container {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .timer {
+                font-size: 1.8rem;
+            }
+            
+            .practice-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .practice-btn {
+                width: 100%;
+            }
+            
+            .word-image {
+                max-width: 300px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .word-display {
+                font-size: 2rem;
+                padding: 30px 15px;
+            }
+            
+            .russian-translation {
+                font-size: 1.1rem;
+            }
+            
+            .continue-btn {
+                padding: 15px 30px;
+                font-size: 1.2rem;
+            }
+            
+            .login-box {
+                padding: 25px;
+            }
+            
+            .login-title {
+                font-size: 1.8rem;
+            }
+            
+            .admin-panel {
+                width: 90%;
+                left: 5%;
+                right: auto;
+            }
+            
+            .practice-word {
+                font-size: 2rem;
+            }
+            
+            .practice-translation {
+                font-size: 1.2rem;
+            }
+            
+            .practice-english {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Flower Decorations -->
+    <div class="flower flower-1">🌸</div>
+    <div class="flower flower-2">🌺</div>
+    <div class="flower flower-3">🌼</div>
+    <div class="flower flower-4">🌻</div>
+    
+    <!-- Login Screen -->
+    <div class="login-screen" id="login-screen">
+        <div class="login-box">
+            <h2 class="login-title">Воҳидҳои лексикӣ</h2>
+            <input type="text" id="username" class="login-input" placeholder="Логин">
+            <input type="password" id="password" class="login-input" placeholder="Парол">
+            <button class="login-btn" id="login-btn">Даромадан</button>
+            <div class="login-error" id="login-error">Логин ё парол нодуруст аст!</div>
+        </div>
+    </div>
+    
+    <!-- Admin Panel -->
+    <div class="admin-panel" id="admin-panel">
+        <h3 class="admin-title">Панели идоракунӣ</h3>
+        <div class="admin-stats">Умумии корбарон: <span id="total-users">0</span></div>
+        <div class="admin-stats">Тестҳои анҷомдода: <span id="total-tests">0</span></div>
+        <div class="admin-stats">Тестҳои гузашта: <span id="passed-tests">0</span></div>
+        <div class="admin-stats">Тестҳои нагузашта: <span id="failed-tests">0</span></div>
+        
+        <div class="user-stats-container" id="user-stats-container">
+            <!-- User stats will be displayed here -->
+        </div>
+        
+        <button class="admin-btn" id="add-words-btn">Иловаи калима</button>
+        <button class="admin-btn" id="logout-btn">Баромадан</button>
+    </div>
+    
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="panda-icon">🐼</div>
+            <h1>Panda & Mina</h1>
+            <div class="bunny-icon">🐰</div>
+            <div class="subtitle">Тарҷумаи калимаҳо аз тоҷикӣ ба англисӣ</div>
+        </div>
+        
+        <!-- Unit Selection Screen -->
+        <div class="unit-selection" id="unit-selection">
+            <button class="unit-btn" id="unit6-final-btn">
+                Unite 6 охир
+                <span>50 калимаи асосӣ</span>
+            </button>
+            <button class="unit-btn" id="practice-btn">
+                Практика
+                <span>Калимаҳо аз юнитҳо</span>
+            </button>
+        </div>
+        
+        <!-- Test Screen -->
+        <div class="test-screen" id="test-screen">
+            <div class="test-header">
+                <div class="progress-container" id="progress">Калима: 1/50</div>
+                <div class="timer-container">
+                    <div class="timer" id="timer">540</div>
+                </div>
+            </div>
+            
+            <div class="word-display" id="word-display">
+                <div id="tajik-word">кӯдак</div>
+                <div class="russian-translation" id="russian-word">ребёнок</div>
+            </div>
+            
+            <div class="answer-container">
+                <input type="text" id="answer" placeholder="Навишед ба англисӣ..." autocomplete="off">
+            </div>
+            
+            <button class="continue-btn" id="continue-btn" disabled>Идома додан</button>
+        </div>
+        
+        <!-- Practice Screen -->
+        <div class="practice-screen" id="practice-screen">
+            <div class="practice-header">
+                <div class="practice-title">Ҳамаҷониба омӯзиши калимаҳо</div>
+            </div>
+            
+            <div class="practice-content">
+                <div class="word-image-container">
+                    <img id="word-image" class="word-image" src="" alt="Word illustration">
+                    <div class="word-info">
+                        <div class="practice-word" id="practice-word">кӯдак</div>
+                        <div class="practice-translation" id="practice-translation">ребёнок</div>
+                        <div class="practice-english" id="practice-english">child</div>
+                    </div>
+                </div>
+                
+                <div class="sentence-section">
+                    <div class="sentence-instruction">Ҷумлаи худро бо ин калима нависед:</div>
+                    <input type="text" class="sentence-input" id="sentence-input" placeholder="Мисол: I saw a child playing in the park">
+                    
+                    <div class="voice-recording">
+                        <button class="record-btn" id="record-btn">
+                            <i class="fas fa-microphone"></i> Сабти ҷумла бо овоз
+                        </button>
+                        <audio controls class="audio-player" id="audio-player"></audio>
+                        <div class="pronunciation-feedback" id="pronunciation-feedback">
+                            <div id="pronunciation-text"></div>
+                            <div class="pronunciation-hint" id="pronunciation-hint"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="sentence-feedback" id="sentence-feedback">
+                        <div id="feedback-text"></div>
+                        <div class="sentence-correct-answer" id="correct-sentence"></div>
+                        <div class="example-sentence" id="example-sentence"></div>
+                    </div>
+                </div>
+                
+                <div class="practice-buttons">
+                    <button class="practice-btn" id="check-sentence-btn">
+                        <i class="fas fa-check"></i> Тафтиши ҷумла
+                    </button>
+                    <button class="practice-btn" id="check-pronunciation-btn">
+                        <i class="fas fa-volume-up"></i> Санҷиши талаффуз
+                    </button>
+                    <button class="practice-btn" id="next-practice-btn">
+                        <i class="fas fa-arrow-right"></i> Калимаи нав
+                    </button>
+                    <button class="practice-btn" id="back-practice-btn">
+                        <i class="fas fa-home"></i> Бозгашт
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Results Screen -->
+        <div class="results-screen" id="results-screen">
+            <h2 class="results-title">Натиҷаҳои тест</h2>
+            
+            <div class="stats-container">
+                <div class="stat-item">Шумо <span class="stat-value" id="score">45</span> аз <span class="stat-value">50</span>-ро дуруст ҷавоб додед</div>
+                <div class="stat-item">Фоизи дурустӣ: <span class="stat-value" id="percentage">90%</span></div>
+                <div class="stat-item">Миқдори хатоҳо: <span class="stat-value" id="mistakes-count">5</span></div>
+            </div>
+            
+            <div class="message" id="message">Аъло! Шумо моҳири забони англисӣ ҳастед! 👏</div>
+            <div class="panda-message" id="panda-message"></div>
+            
+            <div class="results-buttons">
+                <button class="result-btn" id="restart-btn">Аз нав сар кардан</button>
+                <button class="result-btn" id="show-errors-btn">Хатоҳоро нигаред</button>
+            </div>
+            
+            <div class="errors-container" id="errors-container">
+                <h3 class="error-title">Рӯйхати хатоҳо</h3>
+                <!-- Errors will be displayed here dynamically -->
+            </div>
+        </div>
+    </div>
 
+    <script>
+        // Vocabulary for Unit 6 (final) with Russian translations and example images
+        const units = {
+            "Unite 6 охир": [
+                {tajik: "истгоҳи беҳаракат / лангаргоҳ", english: "anchorage", russian: "якорная стоянка", image: "https://images.unsplash.com/photo-1501594907352-04cda38ebc29"},
+                {tajik: "бахшиш пурсидан", english: "apologize", russian: "извиняться", image: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e"},
+                {tajik: "тармафарой", english: "avalanche", russian: "лавина", image: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2"},
+                {tajik: "истгоҳи автобус", english: "bus stop", russian: "автобусная остановка", image: "https://images.unsplash.com/photo-1558002038-1055907df827"},
+                {tajik: "суратгир (киногир)", english: "cameraman", russian: "оператор, кинооператор", image: "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0"},
+                {tajik: "эҳтиёткор", english: "cautious", russian: "осторожный", image: "https://images.unsplash.com/photo-1542103749-8ef59b94f47e"},
+                {tajik: "хислат, нишонаи хислат", english: "character trait", russian: "черта характера", image: "https://images.unsplash.com/photo-1517420704952-d9f39e95b43e"},
+                {tajik: "харизма дошта", english: "charismatic", russian: "харизматичный", image: "https://images.unsplash.com/photo-1517849845537-4d257902454a"},
+                {tajik: "часпидан, овехтан", english: "cling", russian: "цепляться", image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5"},
+                {tajik: "капидан, сахт доштан", english: "clutch", russian: "схватить", image: "https://images.unsplash.com/photo-1493612276216-ee3925520721"},
+                {tajik: "қаллоб", english: "con", russian: "жулик", image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e"},
+                {tajik: "қисми таркибӣ", english: "constituent", russian: "составная часть", image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750"},
+                {tajik: "ҳунар", english: "craft", russian: "ремесло", image: "https://images.unsplash.com/photo-1563298258-c9e2ca667b3e"},
+                {tajik: "партофтан", english: "desert (v)", russian: "покидать", image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef"},
+                {tajik: "нобоварӣ", english: "disbelief", russian: "недоверие", image: "https://images.unsplash.com/photo-1509316785289-025f5b846b35"},
+                {tajik: "дукарата", english: "double", russian: "двойной", image: "https://images.unsplash.com/photo-1547981609-4b6bfe67ca0b"},
+                {tajik: "ҷорӣ шудан, ҳаракат кардан", english: "drift", russian: "дрейф", image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40"},
+                {tajik: "лухтак, манекен", english: "dummy", russian: "кукла, манекен", image: "https://images.unsplash.com/photo-1508784411316-02b8cd4d3a3a"},
+                {tajik: "шохгавазн", english: "elk", russian: "лось", image: "https://images.unsplash.com/photo-1507035895480-2b3156c31fc8"},
+                {tajik: "лоғар, бемадор", english: "emaciated", russian: "истощённый", image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e"},
+                {tajik: "сустона, бемадорона", english: "feebly", russian: "слабо", image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f"},
+                {tajik: "шах, номзад (бахтдор)", english: "fiancé", russian: "жених", image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f"},
+                {tajik: "диққат додан", english: "focus", russian: "фокусироваться", image: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519"},
+                {tajik: "сӯзишворӣ", english: "fuel", russian: "топливо", image: "https://images.unsplash.com/photo-1509316785289-025f5b846b35"},
+                {tajik: "бодиққат нигаристан", english: "gaze", russian: "пристально смотреть", image: "https://images.unsplash.com/photo-1501594907352-04cda38ebc29"},
+                {tajik: "як мушт", english: "handful", russian: "пригоршня", image: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e"},
+                {tajik: "пайваста хотиррасон шудан, ташвиш додан", english: "haunt", russian: "преследовать", image: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2"},
+                {tajik: "фаромӯшнашаванда", english: "haunting", russian: "запоминающийся", image: "https://images.unsplash.com/photo-1558002038-1055907df827"},
+                {tajik: "хоби зимистона", english: "hibernation", russian: "зимняя спячка", image: "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0"},
+                {tajik: "гипотермия", english: "hypothermia", russian: "переохлаждение", image: "https://images.unsplash.com/photo-1542103749-8ef59b94f47e"},
+                {tajik: "хоначаи барфӣ", english: "igloo", russian: "иглу", image: "https://images.unsplash.com/photo-1517420704952-d9f39e95b43e"},
+                {tajik: "вобаста ба", english: "in connection with", russian: "в связи с", image: "https://images.unsplash.com/photo-1517849845537-4d257902454a"},
+                {tajik: "ҳодиса", english: "incident", russian: "инцидент", image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5"},
+                {tajik: "нигоҳубини шадид", english: "intensive care", russian: "интенсивная терапия", image: "https://images.unsplash.com/photo-1493612276216-ee3925520721"},
+                {tajik: "ошкор кардан", english: "lay bare (idiom)", russian: "раскрыть, обнаружить", image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e"},
+                {tajik: "диққати умум", english: "limelight", russian: "центр внимания", image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750"},
+                {tajik: "маҳдудият", english: "limitation", russian: "ограничение", image: "https://images.unsplash.com/photo-1563298258-c9e2ca667b3e"},
+                {tajik: "васваса кардан", english: "lure", russian: "завлекать", image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef"},
+                {tajik: "манипулятивӣ", english: "manipulative", russian: "манипулятивный", image: "https://images.unsplash.com/photo-1509316785289-025f5b846b35"},
+                {tajik: "ниқобпӯш", english: "masked", russian: "замаскированный", image: "https://images.unsplash.com/photo-1547981609-4b6bfe67ca0b"},
+                {tajik: "модарона", english: "maternal", russian: "материнский", image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40"},
+                {tajik: "мелодрама", english: "melodrama", russian: "мелодрама", image: "https://images.unsplash.com/photo-1508784411316-02b8cd4d3a3a"},
+                {tajik: "гумшуда, дастнорас", english: "missing", russian: "недостающий", image: "https://images.unsplash.com/photo-1507035895480-2b3156c31fc8"},
+                {tajik: "хоксор", english: "modest", russian: "скромный", image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e"},
+                {tajik: "дӯстдори табиат", english: "nature lover", russian: "любитель природы", image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f"},
+                {tajik: "асаб", english: "nerve", russian: "нерв", image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f"},
+                {tajik: "тозабунёд", english: "newly-built", russian: "новопостроенный", image: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519"},
+                {tajik: "бюллетени иттилоотӣ", english: "news bulletin", russian: "информационный бюллетень", image: "https://images.unsplash.com/photo-1509316785289-025f5b846b35"},
+                {tajik: "чизи нав, навоварӣ", english: "novelty", russian: "новизна", image: "https://images.unsplash.com/photo-1501594907352-04cda38ebc29"},
+                {tajik: "ғизо", english: "nutrition", russian: "питание", image: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e"}
+            ]
+        };
+
+        // Example sentences for practice mode
+        const exampleSentences = {
+            "anchorage": "The ship found a safe anchorage during the storm.",
+            "apologize": "You should apologize for being late.",
+            "avalanche": "The avalanche destroyed several houses in the village.",
+            "bus stop": "I'll meet you at the bus stop near the park.",
+            "cameraman": "The cameraman filmed the entire event.",
+            "cautious": "Be cautious when walking on the icy sidewalk.",
+            "character trait": "Honesty is an important character trait.",
+            "charismatic": "The charismatic leader inspired his followers.",
+            "cling": "The child would cling to his mother in new situations.",
+            "clutch": "She clutched her purse tightly in the crowd.",
+            "con": "He was arrested for running a con operation.",
+            "constituent": "Each constituent part must work properly.",
+            "craft": "She learned the craft of pottery from her grandmother.",
+            "desert": "The soldier decided to desert his post.",
+            "disbelief": "She stared in disbelief at the unexpected news.",
+            "double": "He ordered a double espresso to stay awake.",
+            "drift": "The boat began to drift away from the shore.",
+            "dummy": "The crash test used a dummy to simulate a person.",
+            "elk": "We saw an elk while hiking in the mountains.",
+            "emaciated": "The emaciated dog was rescued and given food.",
+            "feebly": "He feebly tried to lift the heavy box.",
+            "fiancé": "She introduced her fiancé to the family.",
+            "focus": "Please focus on your work and avoid distractions.",
+            "fuel": "We need to stop for fuel before our trip.",
+            "gaze": "His gaze never left the beautiful painting.",
+            "handful": "She took a handful of nuts from the bowl.",
+            "haunt": "Memories of the accident still haunt him.",
+            "haunting": "The haunting melody stayed with me all day.",
+            "hibernation": "Bears prepare for hibernation by eating a lot.",
+            "hypothermia": "The hiker was treated for hypothermia.",
+            "igloo": "They built an igloo during their Arctic expedition.",
+            "in connection with": "He was questioned in connection with the crime.",
+            "incident": "The police reported the incident to headquarters.",
+            "intensive care": "After surgery, she was in intensive care.",
+            "lay bare": "The investigation laid bare the corruption.",
+            "limelight": "The actor enjoyed being in the limelight.",
+            "limitation": "The only limitation is your imagination.",
+            "lure": "The bright colors lure insects to the flower.",
+            "manipulative": "She used manipulative tactics to get her way.",
+            "masked": "The masked robber entered the bank.",
+            "maternal": "She has strong maternal instincts.",
+            "melodrama": "The movie was full of over-the-top melodrama.",
+            "missing": "The missing documents were found in the drawer.",
+            "modest": "Despite his wealth, he lived a modest life.",
+            "nature lover": "As a nature lover, she spends weekends hiking.",
+            "nerve": "It takes nerve to speak in front of a crowd.",
+            "newly-built": "They moved into a newly-built apartment.",
+            "news bulletin": "The news bulletin interrupted regular programming.",
+            "novelty": "The novelty of the gadget soon wore off.",
+            "nutrition": "Proper nutrition is essential for good health."
+        };
+
+        // Pronunciation hints for words
+        const pronunciationHints = {
+            "anchorage": "Талаффуз: /ˈæŋkərɪdʒ/ - эн-кер-иҷ",
+            "apologize": "Талаффуз: /əˈpɒlədʒaɪz/ - а-пол-о-ҷайз",
+            "avalanche": "Талаффуз: /ˈævəlɑːnʃ/ - эв-а-ланш",
+            "bus stop": "Талаффуз: /bʌs stɒp/ - бас стоп",
+            "cameraman": "Талаффуз: /ˈkæmrəmæn/ - кэм-ра-мэн",
+            "cautious": "Талаффуз: /ˈkɔːʃəs/ - ко-шус",
+            "character trait": "Талаффуз: /ˈkærəktər treɪt/ - кэр-эк-тер трэйт",
+            "charismatic": "Талаффуз: /ˌkærɪzˈmætɪk/ - кэр-из-мэ-тик",
+            "cling": "Талаффуз: /klɪŋ/ - клинг",
+            "clutch": "Талаффуз: /klʌtʃ/ - клатч",
+            "con": "Талаффуз: /kɒn/ - кон",
+            "constituent": "Талаффуз: /kənˈstɪtʃuənt/ - кен-сти-чу-ент",
+            "craft": "Талаффуз: /krɑːft/ - крафт",
+            "desert": "Талаффуз: /dɪˈzɜːrt/ - ди-зёрт",
+            "disbelief": "Талаффуз: /ˌdɪsbɪˈliːf/ - дис-би-лиф",
+            "double": "Талаффуз: /ˈdʌbl/ - дабл",
+            "drift": "Талаффуз: /drɪft/ - дрифт",
+            "dummy": "Талаффуз: /ˈdʌmi/ - да-ми",
+            "elk": "Талаффуз: /elk/ - элк",
+            "emaciated": "Талаффуз: /ɪˈmeɪsieɪtɪd/ - и-мэй-си-эй-тид",
+            "feebly": "Талаффуз: /ˈfiːbli/ - фи-бли",
+            "fiancé": "Талаффуз: /fiˈɒnseɪ/ - фи-он-сэй",
+            "focus": "Талаффуз: /ˈfəʊkəs/ - фо-кус",
+            "fuel": "Талаффуз: /ˈfjuːəl/ - фью-эл",
+            "gaze": "Талаффуз: /ɡeɪz/ - гэйз",
+            "handful": "Талаффуз: /ˈhændfʊl/ - хэнд-фул",
+            "haunt": "Талаффуз: /hɔːnt/ - хонт",
+            "haunting": "Талаффуз: /ˈhɔːntɪŋ/ - хон-тинг",
+            "hibernation": "Талаффуз: /ˌhaɪbəˈneɪʃn/ - хай-бер-нэй-шн",
+            "hypothermia": "Талаффуз: /ˌhaɪpəˈθɜːrmiə/ - хай-по-тёр-ми-а",
+            "igloo": "Талаффуз: /ˈɪɡluː/ - иг-лу",
+            "in connection with": "Талаффуз: /ɪn kəˈnekʃn wɪð/ - ин ке-нек-шн виз",
+            "incident": "Талаффуз: /ˈɪnsɪdənt/ - ин-си-дент",
+            "intensive care": "Талаффуз: /ɪnˈtensɪv keər/ - ин-тен-сив кэр",
+            "lay bare": "Талаффуз: /leɪ beər/ - лэй бэр",
+            "limelight": "Талаффуз: /ˈlaɪmlaɪt/ - лайм-лайт",
+            "limitation": "Талаффуз: /ˌlɪmɪˈteɪʃn/ - ли-ми-тэй-шн",
+            "lure": "Талаффуз: /lʊər/ - люр",
+            "manipulative": "Талаффуз: /məˈnɪpjələtɪv/ - ме-нип-ю-ла-тив",
+            "masked": "Талаффуз: /mɑːskt/ - маст",
+            "maternal": "Талаффуз: /məˈtɜːrnl/ - ме-тёр-нл",
+            "melodrama": "Талаффуз: /ˈmelədrɑːmə/ - ме-ло-дра-ма",
+            "missing": "Талаффуз: /ˈmɪsɪŋ/ - ми-синг",
+            "modest": "Талаффуз: /ˈmɒdɪst/ - мо-дист",
+            "nature lover": "Талаффуз: /ˈneɪtʃər ˈlʌvər/ - нэй-чер ла-вер",
+            "nerve": "Талаффуз: /nɜːrv/ - нёрв",
+            "newly-built": "Талаффуз: /ˈnjuːli bɪlt/ - нью-ли билт",
+            "news bulletin": "Талаффуз: /njuːz ˈbʊlətɪn/ - ньюз бу-ле-тин",
+            "novelty": "Талаффуз: /ˈnɒvlti/ - нов-эл-ти",
+            "nutrition": "Талаффуз: /njuˈtrɪʃn/ - нью-три-шн"
+        };
+
+        // DOM elements
+        const unitSelection = document.getElementById('unit-selection');
+        const testScreen = document.getElementById('test-screen');
+        const practiceScreen = document.getElementById('practice-screen');
+        const resultsScreen = document.getElementById('results-screen');
+        const tajikWordDisplay = document.getElementById('tajik-word');
+        const russianWordDisplay = document.getElementById('russian-word');
+        const practiceWordDisplay = document.getElementById('practice-word');
+        const practiceTranslationDisplay = document.getElementById('practice-translation');
+        const practiceEnglishDisplay = document.getElementById('practice-english');
+        const wordImage = document.getElementById('word-image');
+        const answerInput = document.getElementById('answer');
+        const sentenceInput = document.getElementById('sentence-input');
+        const timerDisplay = document.getElementById('timer');
+        const progressDisplay = document.getElementById('progress');
+        const continueBtn = document.getElementById('continue-btn');
+        const restartBtn = document.getElementById('restart-btn');
+        const showErrorsBtn = document.getElementById('show-errors-btn');
+        const errorsContainer = document.getElementById('errors-container');
+        const scoreDisplay = document.getElementById('score');
+        const percentageDisplay = document.getElementById('percentage');
+        const mistakesCountDisplay = document.getElementById('mistakes-count');
+        const messageDisplay = document.getElementById('message');
+        const pandaMessageDisplay = document.getElementById('panda-message');
+        const loginScreen = document.getElementById('login-screen');
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const loginBtn = document.getElementById('login-btn');
+        const loginError = document.getElementById('login-error');
+        const adminPanel = document.getElementById('admin-panel');
+        const addWordsBtn = document.getElementById('add-words-btn');
+        const logoutBtn = document.getElementById('logout-btn');
+        const totalUsersDisplay = document.getElementById('total-users');
+        const totalTestsDisplay = document.getElementById('total-tests');
+        const passedTestsDisplay = document.getElementById('passed-tests');
+        const failedTestsDisplay = document.getElementById('failed-tests');
+        const userStatsContainer = document.getElementById('user-stats-container');
+        const recordBtn = document.getElementById('record-btn');
+        const audioPlayer = document.getElementById('audio-player');
+        const checkSentenceBtn = document.getElementById('check-sentence-btn');
+        const checkPronunciationBtn = document.getElementById('check-pronunciation-btn');
+        const nextPracticeBtn = document.getElementById('next-practice-btn');
+        const backPracticeBtn = document.getElementById('back-practice-btn');
+        const sentenceFeedback = document.getElementById('sentence-feedback');
+        const feedbackText = document.getElementById('feedback-text');
+        const correctSentence = document.getElementById('correct-sentence');
+        const exampleSentence = document.getElementById('example-sentence');
+        const pronunciationFeedback = document.getElementById('pronunciation-feedback');
+        const pronunciationText = document.getElementById('pronunciation-text');
+        const pronunciationHint = document.getElementById('pronunciation-hint');
+        
+        // Unit buttons
+        const unit6FinalBtn = document.getElementById('unit6-final-btn');
+        const practiceBtn = document.getElementById('practice-btn');
+
+        // State variables
+        let currentVocabulary = [];
+        let currentWordIndex = 0;
+        let score = 0;
+        let timeLeft = 540; // 9 minutes in seconds (540 seconds)
+        let timer;
+        let mistakes = [];
+        let selectedUnit = "";
+        let isAdmin = false;
+        let currentUser = null;
+        let mediaRecorder;
+        let audioChunks = [];
+        let isRecording = false;
+        
+        // Data storage
+        let appData = {
+            users: {},
+            tests: []
+        };
+
+        // Load data from localStorage
+        function loadData() {
+            const savedData = localStorage.getItem('vocabularyTrainerData');
+            if (savedData) {
+                appData = JSON.parse(savedData);
+            }
+        }
+        
+        // Save data to localStorage
+        function saveData() {
+            localStorage.setItem('vocabularyTrainerData', JSON.stringify(appData));
+        }
+        
+        // Initialize data and show unit selection immediately
+        loadData();
+        loginScreen.style.display = 'none';
+        unitSelection.style.display = 'grid';
+
+        // Login functionality
+        function checkLogin() {
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value.trim();
+            
+            if (!username || !password) {
+                loginError.textContent = "Лутфан ҳамаи майдонҳоро пур кунед!";
+                loginError.style.display = 'block';
+                return;
+            }
+            
+            // For admin
+            if (username === "admin" && password === "12345") {
+                currentUser = username;
+                isAdmin = true;
+                loginScreen.style.display = 'none';
+                adminPanel.style.display = 'block';
+                updateAdminStats();
+                return;
+            }
+            
+            // For regular users
+            if (!appData.users[username]) {
+                // Register new user
+                appData.users[username] = {
+                    password: password,
+                    loginCount: 0,
+                    tests: []
+                };
+            } else if (appData.users[username].password !== password) {
+                loginError.textContent = "Парол нодуруст аст!";
+                loginError.style.display = 'block';
+                return;
+            }
+            
+            // Successful login
+            currentUser = username;
+            isAdmin = false;
+            appData.users[username].loginCount++;
+            saveData();
+            
+            loginScreen.style.display = 'none';
+            loginError.style.display = 'none';
+        }
+        
+        function logout() {
+            currentUser = null;
+            isAdmin = false;
+            adminPanel.style.display = 'none';
+            loginScreen.style.display = 'none';
+            unitSelection.style.display = 'grid';
+            testScreen.style.display = 'none';
+            resultsScreen.style.display = 'none';
+            usernameInput.value = '';
+            passwordInput.value = '';
+        }
+        
+        loginBtn.addEventListener('click', checkLogin);
+        
+        passwordInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkLogin();
+            }
+        });
+        
+        logoutBtn.addEventListener('click', logout);
+        
+        // Update admin statistics
+        function updateAdminStats() {
+            if (!isAdmin) return;
+            
+            const users = Object.keys(appData.users);
+            const tests = appData.tests;
+            const passedTests = tests.filter(test => test.score >= test.total * 0.7).length;
+            const failedTests = tests.filter(test => test.score < test.total * 0.7).length;
+            
+            totalUsersDisplay.textContent = users.length;
+            totalTestsDisplay.textContent = tests.length;
+            passedTestsDisplay.textContent = passedTests;
+            failedTestsDisplay.textContent = failedTests;
+            
+            // Display user statistics
+            userStatsContainer.innerHTML = '';
+            
+            users.forEach(user => {
+                const userTests = tests.filter(test => test.username === user);
+                const userStatItem = document.createElement('div');
+                userStatItem.className = 'user-stat-item';
+                userStatItem.innerHTML = `<strong>${user}</strong>: ${userTests.length} тест(ҳо)`;
+                userStatsContainer.appendChild(userStatItem);
+            });
+        }
+        
+        // Add words functionality
+        function addNewWords() {
+            if (!isAdmin) return;
+            
+            const unit = prompt("Барои кадом юнит мехоҳед калима илова кунед? (Unite 6 охир)");
+            if (!unit || !units[unit]) {
+                alert("Номи юнит нодуруст!");
+                return;
+            }
+            
+            const tajik = prompt("Калимаи тоҷикӣ:");
+            const english = prompt("Калимаи англисӣ:");
+            const russian = prompt("Тарҷумаи русӣ:");
+            const image = prompt("URL-и тасвир (ихтиёрӣ):");
+            
+            if (tajik && english && russian) {
+                units[unit].push({tajik, english, russian, image: image || "https://images.unsplash.com/photo-1541963463532-d68292c34b19"});
+                alert("Калима бо муваффақият илова шуд!");
+            } else {
+                alert("Лутфан ҳамаи майдонҳоро пур кунед!");
+            }
+        }
+        
+        addWordsBtn.addEventListener('click', addNewWords);
+        
+        // Initialize unit selection
+        unit6FinalBtn.addEventListener('click', () => startUnit("Unite 6 охир"));
+        practiceBtn.addEventListener('click', startPractice);
+
+        // Start selected unit
+        function startUnit(unitName) {
+            selectedUnit = unitName;
+            currentVocabulary = [...units[unitName]]; // Copy the array
+            shuffleArray(currentVocabulary); // Shuffle the words
+            
+            currentWordIndex = 0;
+            score = 0;
+            timeLeft = 540;
+            mistakes = [];
+            
+            unitSelection.style.display = 'none';
+            testScreen.style.display = 'block';
+            resultsScreen.style.display = 'none';
+            
+            // Disable continue button initially
+            continueBtn.disabled = true;
+            showWord();
+            startTimer();
+            
+            setTimeout(() => {
+                answerInput.focus();
+            }, 100);
+        }
+
+        // Start practice mode
+        function startPractice() {
+            // Use only Unit 6 final for practice
+            currentVocabulary = [...units["Unite 6 охир"]];
+            
+            shuffleArray(currentVocabulary);
+            currentWordIndex = 0;
+            
+            unitSelection.style.display = 'none';
+            practiceScreen.style.display = 'block';
+            sentenceFeedback.style.display = 'none';
+            pronunciationFeedback.style.display = 'none';
+            
+            showPracticeWord();
+        }
+
+        // Show current word in practice mode
+        function showPracticeWord() {
+            if (currentWordIndex < currentVocabulary.length) {
+                const currentWord = currentVocabulary[currentWordIndex];
+                practiceWordDisplay.textContent = currentWord.tajik;
+                practiceTranslationDisplay.textContent = currentWord.russian;
+                practiceEnglishDisplay.textContent = currentWord.english;
+                
+                // Set image if available
+                wordImage.src = currentWord.image || "https://images.unsplash.com/photo-1541963463532-d68292c34b19";
+                wordImage.alt = currentWord.english;
+                
+                // Set example sentence
+                exampleSentence.textContent = exampleSentences[currentWord.english] || "";
+                
+                // Clear inputs and feedback
+                sentenceInput.value = '';
+                sentenceFeedback.style.display = 'none';
+                pronunciationFeedback.style.display = 'none';
+                audioPlayer.style.display = 'none';
+                audioPlayer.src = '';
+            }
+        }
+
+        // Check user's sentence in practice mode
+        function checkSentence() {
+            const userSentence = sentenceInput.value.trim();
+            if (!userSentence) {
+                alert("Лутфан ҷумла нависед!");
+                return;
+            }
+            
+            const englishWord = currentVocabulary[currentWordIndex].english.toLowerCase();
+            const includesWord = userSentence.toLowerCase().includes(englishWord);
+            
+            if (includesWord) {
+                feedbackText.innerHTML = "Ҷумлаи шумо дуруст аст! <i class='fas fa-check-circle'></i>";
+                sentenceFeedback.className = "sentence-feedback sentence-correct";
+                correctSentence.textContent = "";
+            } else {
+                // Highlight the incorrect part
+                const highlightedSentence = userSentence.replace(
+                    new RegExp(`(${englishWord})`, 'gi'),
+                    "<span class='highlight-error'>$1</span>"
+                );
+                
+                feedbackText.innerHTML = `Ҷумлаи шумо: ${highlightedSentence} <i class='fas fa-times-circle'></i>`;
+                sentenceFeedback.className = "sentence-feedback sentence-incorrect";
+                correctSentence.textContent = "Калимаи англисӣ бояд дар ҷумла ишора шавад.";
+            }
+            
+            sentenceFeedback.style.display = 'block';
+        }
+
+        // Check pronunciation
+        function checkPronunciation() {
+            if (!audioPlayer.src) {
+                alert("Лутфан аввал овозро сабт кунед!");
+                return;
+            }
+            
+            // In a real app, this would use speech recognition API
+            // For demo, we'll just show random feedback
+            const isCorrect = Math.random() > 0.3;
+            
+            if (isCorrect) {
+                pronunciationText.innerHTML = "Талаффузи шумо дуруст аст! <i class='fas fa-check-circle'></i>";
+                pronunciationFeedback.className = "pronunciation-feedback pronunciation-correct";
+                pronunciationHint.textContent = "";
+            } else {
+                pronunciationText.innerHTML = "Талаффузи шумо нодуруст аст <i class='fas fa-times-circle'></i>";
+                pronunciationFeedback.className = "pronunciation-feedback pronunciation-incorrect";
+                pronunciationHint.textContent = pronunciationHints[currentVocabulary[currentWordIndex].english] || "Талош кунед, ки калимаро бо талаффузи дуруст иҷро кунед.";
+            }
+            
+            pronunciationFeedback.style.display = 'block';
+        }
+
+        // Voice recording functionality
+        async function toggleRecording() {
+            if (!isRecording) {
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    mediaRecorder = new MediaRecorder(stream);
+                    audioChunks = [];
+                    
+                    mediaRecorder.ondataavailable = event => {
+                        audioChunks.push(event.data);
+                    };
+                    
+                    mediaRecorder.onstop = () => {
+                        const audioBlob = new Blob(audioChunks, { type: 'audio/mp3' });
+                        const audioUrl = URL.createObjectURL(audioBlob);
+                        audioPlayer.src = audioUrl;
+                        audioPlayer.style.display = 'block';
+                    };
+                    
+                    mediaRecorder.start();
+                    isRecording = true;
+                    recordBtn.innerHTML = "<i class='fas fa-stop'></i> Иқтидоъи сабт";
+                    recordBtn.classList.add('recording');
+                } catch (err) {
+                    console.error("Error recording audio:", err);
+                    alert("Имкони сабти овоз дастрас нест. Лутфан иҷозат диҳед.");
+                }
+            } else {
+                mediaRecorder.stop();
+                isRecording = false;
+                recordBtn.innerHTML = "<i class='fas fa-microphone'></i> Сабти ҷумла бо овоз";
+                recordBtn.classList.remove('recording');
+                
+                // Stop all tracks in the stream
+                mediaRecorder.stream.getTracks().forEach(track => track.stop());
+            }
+        }
+
+        // Show current word
+        function showWord() {
+            if (currentWordIndex < currentVocabulary.length) {
+                tajikWordDisplay.textContent = currentVocabulary[currentWordIndex].tajik;
+                russianWordDisplay.textContent = currentVocabulary[currentWordIndex].russian;
+                answerInput.value = '';
+                progressDisplay.textContent = `Калима: ${currentWordIndex+1}/${currentVocabulary.length}`;
+                
+                // Disable continue button until user types something
+                continueBtn.disabled = true;
+            }
+        }
+
+        // Next word
+        function nextWord() {
+            const userAnswer = answerInput.value.trim().toLowerCase();
+            const correctAnswer = currentVocabulary[currentWordIndex].english.toLowerCase();
+            
+            if (userAnswer !== correctAnswer) {
+                mistakes.push({
+                    tajik: currentVocabulary[currentWordIndex].tajik,
+                    english: currentVocabulary[currentWordIndex].english,
+                    russian: currentVocabulary[currentWordIndex].russian,
+                    userAnswer: userAnswer
+                });
+            } else {
+                score++;
+            }
+            
+            currentWordIndex++;
+            
+            if (currentWordIndex < currentVocabulary.length && timeLeft > 0) {
+                showWord();
+                answerInput.focus();
+            } else {
+                finishGame();
+            }
+        }
+
+        // Timer
+        function startTimer() {
+            clearInterval(timer);
+            updateTimerDisplay();
+            
+            timer = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay();
+                
+                if (timeLeft <= 0) {
+                    finishGame();
+                }
+            }, 1000);
+        }
+        
+        function updateTimerDisplay() {
+            // Display only seconds
+            timerDisplay.textContent = timeLeft;
+        }
+
+        // Finish game
+        function finishGame() {
+            clearInterval(timer);
+            
+            const percentage = Math.round((score / currentVocabulary.length) * 100);
+            const passed = percentage >= 70;
+            
+            // Save test results only if user is logged in
+            if (currentUser) {
+                const testResult = {
+                    username: currentUser,
+                    unit: selectedUnit,
+                    date: new Date().toLocaleString(),
+                    score: score,
+                    total: currentVocabulary.length,
+                    percentage: percentage,
+                    passed: passed
+                };
+                
+                appData.tests.push(testResult);
+                
+                // Update user stats
+                if (appData.users[currentUser]) {
+                    appData.users[currentUser].tests.push(testResult);
+                }
+                
+                saveData();
+            }
+            
+            // Update UI
+            scoreDisplay.textContent = score;
+            percentageDisplay.textContent = `${percentage}%`;
+            mistakesCountDisplay.textContent = mistakes.length;
+            
+            // Set regular message based on percentage
+            if (percentage >= 90) {
+                messageDisplay.textContent = "Аъло! Шумо моҳири забони англисӣ ҳастед! 👏";
+            } else if (percentage >= 70) {
+                messageDisplay.textContent = "Хуб! Натиҷаи хуб! 👍";
+            } else {
+                messageDisplay.textContent = "Талош кунед, боз ҳам метавонед беҳтар! 💪";
+            }
+            
+            // Set Panda message based on score (42+ or less)
+            if (score >= 42) {
+                pandaMessageDisplay.textContent = "Mina Panda loves you! 🐼❤️";
+            } else {
+                pandaMessageDisplay.textContent = "Don't worry, Panda is with you! 🐼🤗";
+            }
+            
+            testScreen.style.display = 'none';
+            resultsScreen.style.display = 'block';
+            errorsContainer.style.display = 'none';
+            
+            // Update admin stats if admin is logged in
+            if (isAdmin) {
+                updateAdminStats();
+            }
+        }
+
+        // Show errors
+        function showErrors() {
+            if (errorsContainer.style.display === 'none') {
+                let errorsHTML = '';
+                
+                if (mistakes.length === 0) {
+                    errorsHTML = '<p>Шумо ягон хато надоштед! 👏</p>';
+                } else {
+                    mistakes.forEach((mistake, index) => {
+                        errorsHTML += `
+                            <div class="error-item">
+                                <div class="error-tajik">${index + 1}. ${mistake.tajik} (${mistake.russian})</div>
+                                <div class="correct-answer">Ҷавоби дуруст: ${mistake.english}</div>
+                                <div class="user-answer">Ҷавоби шумо: ${mistake.userAnswer || '---'}</div>
+                            </div>
+                        `;
+                    });
+                }
+                
+                errorsContainer.innerHTML = errorsHTML;
+                errorsContainer.style.display = 'block';
+                showErrorsBtn.textContent = "Пинҳон кардани хатоҳо";
+            } else {
+                errorsContainer.style.display = 'none';
+                showErrorsBtn.textContent = "Хатоҳоро нигаред";
+            }
+        }
+
+        // Event listeners
+        continueBtn.addEventListener('click', nextWord);
+        
+        answerInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && !continueBtn.disabled) {
+                nextWord();
+            }
+        });
+        
+        // Enable/disable continue button based on input
+        answerInput.addEventListener('input', function() {
+            continueBtn.disabled = this.value.trim() === '';
+        });
+        
+        restartBtn.addEventListener('click', function() {
+            resultsScreen.style.display = 'none';
+            unitSelection.style.display = 'grid';
+        });
+        
+        showErrorsBtn.addEventListener('click', showErrors);
+        
+        // Practice mode event listeners
+        recordBtn.addEventListener('click', toggleRecording);
+        checkSentenceBtn.addEventListener('click', checkSentence);
+        checkPronunciationBtn.addEventListener('click', checkPronunciation);
+        
+        nextPracticeBtn.addEventListener('click', function() {
+            currentWordIndex++;
+            if (currentWordIndex >= currentVocabulary.length) {
+                currentWordIndex = 0;
+            }
+            showPracticeWord();
+        });
+        
+        backPracticeBtn.addEventListener('click', function() {
+            practiceScreen.style.display = 'none';
+            unitSelection.style.display = 'grid';
+        });
+        
+        // Utility function to shuffle array
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+    </script>
+</body>
+</html>
