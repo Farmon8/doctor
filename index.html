@@ -806,61 +806,277 @@
     </div>
 
     <script>
-        // Vocabulary for Unit 7
-        const units = {
-            "Unit 7": [
-                {tajik: "ақидаи мустаҳкам", english: "obsession", russian: "навязчивая идея"},
-                {tajik: "палто, шинел", english: "overcoat", russian: "пальто, шинель"},
-                {tajik: "китоби ҳаяҷоновар", english: "page-turner", russian: "захватывающая книга"},
-                {tajik: "то охир бози кардан", english: "play out", russian: "доиграть до конца"},
-                {tajik: "бор кардан", english: "plunge", russian: "погружаться"},
-                {tajik: "ҳолати бад", english: "poor state", russian: "плохое состояние"},
-                {tajik: "ҳисси шахсӣ", english: "possessiveness", russian: "собственничество"},
-                {tajik: "азоб додан, ҳабс кардан", english: "pound", russian: "бить, загонять"},
-                {tajik: "пешгӯӣ", english: "prediction", russian: "предсказание"},
-                {tajik: "соҳиби амлок", english: "property tycoon", russian: "имущественный магнат"},
-                {tajik: "тарафдорон", english: "pros", russian: "аргументы за"},
-                {tajik: "духтури рӯҳӣ", english: "psychiatrist", russian: "психиатр"},
-                {tajik: "ҳамла, рейд", english: "raid", russian: "облава, рейд"},
-                {tajik: "наҷотдиҳанда", english: "rescuer", russian: "спасатель"},
-                {tajik: "таваккал кардан", english: "risk", russian: "рисковать"},
-                {tajik: "роман", english: "romance", russian: "роман"},
-                {tajik: "гузоштан (дар қоп)", english: "sack", russian: "класть в мешок"},
-                {tajik: "техникаи бехатарӣ", english: "safety precaution", russian: "техника безопасности"},
-                {tajik: "акли солим", english: "sanity", russian: "здравомыслие"},
-                {tajik: "бо шубҳа", english: "skeptical", russian: "скептический"},
-                {tajik: "хоб кардан", english: "scrape", russian: "скрести"},
-                {tajik: "бехатарӣ", english: "security", russian: "безопасность"},
-                {tajik: "ҳиссӣ", english: "sensuous", russian: "чувственный"},
-                {tajik: "шумхобар", english: "sinister", russian: "зловещий"},
-                {tajik: "барфтӯда", english: "snowdrift", russian: "сугроб"},
-                {tajik: "мошини барфгард", english: "snowmobile", russian: "снегоход"},
-                {tajik: "тахмин", english: "speculation", russian: "размышление"},
-                {tajik: "ситора будан", english: "star", russian: "быть звездой"},
-                {tajik: "бадбӯй", english: "stench", russian: "вонь"},
-                {tajik: "ҷориш", english: "stream", russian: "течь"},
-                {tajik: "часпондан", english: "stick", russian: "втыкать"},
-                {tajik: "қатъи инкишоф", english: "stunt", russian: "торможение роста"},
-                {tajik: "каскадёр", english: "stunt man", russian: "каскадёр"},
-                {tajik: "болобардорӣ", english: "sublime", russian: "возвышенное"},
-                {tajik: "зинда мондан", english: "survive", russian: "выжить"},
-                {tajik: "хулоса", english: "synopsis", russian: "конспект"},
-                {tajik: "иҷорадор", english: "tenant", russian: "арендатор"},
-                {tajik: "триллер", english: "thriller", russian: "триллер"},
-                {tajik: "хонандаи беҳтарин", english: "top of the class", russian: "первый ученик"},
-                {tajik: "кашола кардан", english: "tow", russian: "буксировать"},
-                {tajik: "фоҷиави", english: "tragically", russian: "трагически"},
-                {tajik: "аз ҳад гузаштан", english: "transcend", russian: "превосходить"},
-                {tajik: "ниҳоӣ", english: "ultimate", russian: "окончательный"},
-                {tajik: "нобаробар", english: "unbalanced", russian: "несбалансированный"},
-                {tajik: "қаҳрамони номатлуб", english: "unwilling hero", russian: "невольный герой"},
-                {tajik: "гум шудан", english: "vanish", russian: "исчезать"},
-                {tajik: "ҷабрдида", english: "victim", russian: "жертва"},
-                {tajik: "шишаи пеш", english: "windscreen", russian: "лобовое стекло"},
-                {tajik: "эътироф кардан", english: "admit", russian: "признавать"},
-                {tajik: "зиддиҷамъиятӣ", english: "antisocial", russian: "антиобщественный"}
-            ]
-        };
+       // Vocabulary Dictionary
+const vocabulary = {
+    "A": [
+        {
+            english: "anchorage",
+            tajik: "истгоҳи беҳаракат (лангаршуда)",
+            russian: "якорная стоянка"
+        },
+        {
+            english: "apologize",
+            tajik: "бахшиш пурсидан",
+            russian: "извиняться"
+        },
+        {
+            english: "avalanche",
+            tajik: "тармафарой",
+            russian: "лавина, обвал"
+        }
+    ],
+    "B": [
+        {
+            english: "bus stop",
+            tajik: "истгоҳи автобус",
+            russian: "остановка автобуса"
+        }
+    ],
+    "C": [
+        {
+            english: "cameraman",
+            tajik: "суратгир",
+            russian: "оператор, фотограф"
+        },
+        {
+            english: "cautious",
+            tajik: "эҳтиёткор",
+            russian: "осторожный"
+        },
+        {
+            english: "character trait",
+            tajik: "хислати махсус",
+            russian: "черта характера"
+        },
+        {
+            english: "charismatic",
+            tajik: "харизмадор",
+            russian: "харизматический"
+        },
+        {
+            english: "cling",
+            tajik: "банд шудан, часпидан",
+            russian: "цепляться"
+        },
+        {
+            english: "clutch",
+            tajik: "капидан",
+            russian: "схватить"
+        },
+        {
+            english: "con",
+            tajik: "ҳилабаз, жулик",
+            russian: "мошенник"
+        },
+        {
+            english: "constituent",
+            tajik: "қисми таркибӣ",
+            russian: "составная часть"
+        },
+        {
+            english: "craft",
+            tajik: "ҳунар",
+            russian: "ремесло"
+        }
+    ],
+    "D": [
+        {
+            english: "desert",
+            tajik: "тарк кардан",
+            russian: "покидать, бросать"
+        },
+        {
+            english: "disbelief",
+            tajik: "нобоварӣ",
+            russian: "неверие"
+        },
+        {
+            english: "double",
+            tajik: "дукабата",
+            russian: "двойной"
+        },
+        {
+            english: "drift",
+            tajik: "тарс",
+            russian: "дрейф"
+        },
+        {
+            english: "dummy",
+            tajik: "лӯхтак, манекен",
+            russian: "кукла, манекен"
+        }
+    ],
+    "E": [
+        {
+            english: "elk",
+            tajik: "шоҳгавоз",
+            russian: "лось"
+        },
+        {
+            english: "emaciated",
+            tajik: "бемадор, бекувват",
+            russian: "истощённый"
+        }
+    ],
+    "F": [
+        {
+            english: "feebly",
+            tajik: "суст, заиф",
+            russian: "слабо"
+        },
+        {
+            english: "fiancé",
+            tajik: "номзад (шавҳар)",
+            russian: "жених"
+        },
+        {
+            english: "focus",
+            tajik: "диққат равона кардан",
+            russian: "фокусировать"
+        },
+        {
+            english: "fuel",
+            tajik: "сӯзишворӣ",
+            russian: "топливо"
+        }
+    ],
+    "G": [
+        {
+            english: "gaze",
+            tajik: "нигоҳ кардан",
+            russian: "пристально глядеть"
+        }
+    ],
+    "H": [
+        {
+            english: "handful",
+            tajik: "мушт",
+            russian: "пригоршня"
+        },
+        {
+            english: "haunt",
+            tajik: "аз ҳофиза нарафтан",
+            russian: "преследовать (в памяти)"
+        },
+        {
+            english: "hibernation",
+            tajik: "хоби зимистонӣ",
+            russian: "зимняя спячка"
+        },
+        {
+            english: "hypothermia",
+            tajik: "гипотермия",
+            russian: "переохлаждение"
+        }
+    ],
+    "I": [
+        {
+            english: "igloo",
+            tajik: "кулбаи барфӣ",
+            russian: "иглу"
+        },
+        {
+            english: "in connection with",
+            tajik: "бо алоқаи",
+            russian: "в связи с"
+        },
+        {
+            english: "incident",tajik: "ҳодиса",
+            russian: "инцидент"
+        },
+        {
+            english: "intensive care",
+            tajik: "ғамхорӣи шадид",
+            russian: "интенсивная терапия"
+        }
+    ],
+    "L": [
+        {
+            english: "lay bare",
+            tajik: "ошкор кардан",
+            russian: "раскрыть"
+        },
+        {
+            english: "limelight",
+            tajik: "маркази диққат",
+            russian: "центр внимания"
+        },
+        {
+            english: "limitation",
+            tajik: "маҳдудият",
+            russian: "ограничение"
+        },
+        {
+            english: "lure",
+            tajik: "фирефтан",
+            russian: "заманивать"
+        }
+    ],
+    "M": [
+        {
+            english: "manipulative",
+            tajik: "ҳилабаз",
+            russian: "манипулятивный"
+        },
+        {
+            english: "masked",
+            tajik: "пӯшида (маскдор)",
+            russian: "замаскированный"
+        },
+        {
+            english: "maternal",
+            tajik: "модарӣ",
+            russian: "материнский"
+        },
+        {
+            english: "melodrama",
+            tajik: "мелодрама",
+            russian: "мелодрама"
+        },
+        {
+            english: "missing",
+            tajik: "гумшуда",
+            russian: "пропавший"
+        },
+        {
+            english: "modest",
+            tajik: "камтарӣ",
+            russian: "скромный"
+        }
+    ],
+    "N": [
+        {
+            english: "nature lover",
+            tajik: "табиатдӯст",
+            russian: "любитель природы"
+        },
+        {
+            english: "nerve",
+            tajik: "асаб",
+            russian: "нерв"
+        },
+        {
+            english: "newly-built",
+            tajik: "навсозӣ",
+            russian: "новопостроенный"
+        },
+        {
+            english: "news bulletin",
+            tajik: "бюллетени хабарӣ",
+            russian: "новостной бюллетень"
+        },
+        {
+            english: "novelty",
+            tajik: "навоварӣ",
+            russian: "новинка"
+        },
+        {
+            english: "nutrition",
+            tajik: "ғизо",
+            russian: "питание"
+        }
+    ]
+};
 
         // DOM elements
         const unitSelection = document.getElementById('unit-selection');
