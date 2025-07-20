@@ -1,1 +1,567 @@
+<!DOCTYPE html>
+<html lang="tg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Луғатсупорӣ - Юнитҳо</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header {
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .unit-selection {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .unit-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .unit-btn:hover {
+            background-color: #45a049;
+        }
+        
+        .progress {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+        
+        .word-container {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 1px solid #eee;
+        }
+        
+        .word {
+            font-size: 22px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .translation {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 5px;
+        }
+        
+        .timer-container {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 25px;
+            position: relative;
+        }
+        
+        .timer-circle {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 8px solid #f0f0f0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .timer-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            clip: rect(0, 60px, 120px, 0);
+            background-color: #4CAF50;
+            transform: rotate(0deg);
+        }
+        
+        .timer-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .answer-input {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .submit-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+        
+        .results {
+            display: none;
+            margin-top: 30px;
+            text-align: left;
+        }
+        
+        .results h2 {
+            color: #333;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .stats {
+            margin-bottom: 20px;
+        }
+        
+        .stat-item {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        
+        .stat-value {
+            font-weight: bold;
+        }
+        
+        .errors {
+            margin-top: 20px;
+        }
+        
+        .error-item {
+            background-color: #f8f8f8;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            border-left: 3px solid #e74c3c;
+        }
+        
+        .error-word {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .correct-answer {
+            color: #27ae60;
+        }
+        
+        .user-answer {
+            color: #e74c3c;
+            font-style: italic;
+        }
+        
+        .success-message {
+            font-size: 18px;
+            font-weight: bold;
+            color: #27ae60;
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="main-container">
+        <div class="header">
+            <h1>Луғатсупорӣ</h1>
+            <p>Юнети лексикиро интихоб кунед</p>
+        </div>
+        
+        <div class="unit-selection" id="unit-selection">
+            <button class="unit-btn" id="unit5-btn">Юнит 5 Охир (50 калима)</button>
+            <button class="unit-btn" id="unit6-btn">Юнит 6 (50 калима)</button>
+        </div>
+        
+        <div id="game-screen" style="display: none;">
+            <div class="header">
+                <h1 id="unit-title">Юнит 5 Охир</h1>
+                <div class="progress" id="progress">1/50</div>
+            </div>
+            
+            <div class="word-container">
+                <div class="word" id="word">канор, край</div>
+                <div class="translation" id="translation">край</div>
+            </div>
+            
+            <div class="timer-container">
+                <div class="timer-circle">
+                    <div class="timer-progress" id="timer-progress"></div>
+                    <div class="timer-text" id="timer-text">7:00</div>
+                </div>
+            </div>
+            
+            <input type="text" class="answer-input" id="answer" placeholder="Ҷавобро ба англисӣ нависед..." autocomplete="off">
+            <button class="submit-btn" id="submit-btn">Фиристодан</button>
+        </div>
+        
+        <div class="results" id="results">
+            <h2>Натиҷаҳо</h2>
+            
+            <div class="stats">
+                <div class="stat-item">Шумо <span class="stat-value" id="score">0</span> аз <span class="stat-value">50</span>-ро дуруст ҷавоб додед</div>
+                <div class="stat-item">Фоизи дурустӣ: <span class="stat-value" id="percentage">0%</span></div>
+                <div class="stat-item">Миқдори хатоҳо: <span class="stat-value" id="mistakes">0</span></div>
+            </div>
+            
+            <div id="success-message" class="success-message"></div>
+            
+            <div class="errors" id="errors">
+                <h3>Хатоҳо:</h3>
+                <!-- Errors will be displayed here -->
+            </div>
+        </div>
+    </div>
 
+    <script>
+        // Vocabulary for Unit 5 End
+        const unit5Vocabulary = [
+            { tajik: "канор, край", russian: "край", english: "edge" },
+            { tajik: "император", russian: "император", english: "emperor" },
+            { tajik: "саньати мухандисй", russian: "инженерное искусство", english: "engineering" },
+            { tajik: "ҳолати фавқулодаи экологӣ", russian: "экологическая чрезвычайная ситуация", english: "environmental emergency" },
+            { tajik: "тадкикодчи", russian: "исследователь", english: "explorer" },
+            { tajik: "хавопаймои", russian: "самолёт-истребитель", english: "fighter plane" },
+            { tajik: "пуркунанда, дахана", russian: "наполнитель, воронка", english: "filler" },
+            { tajik: "дог, доги кунчитак", russian: "пятно, веснушка", english: "fleck" },
+            { tajik: "кисм, каср", russian: "часть, дробь", english: "fraction" },
+            { tajik: "пора, порча", russian: "кусок", english: "fragment" },
+            { tajik: "ба кор шуруь кардан", russian: "приступить к делу", english: "get down to business" },
+            { tajik: "фуру бурдан", russian: "поглотать", english: "gobble up" },
+            { tajik: "системаи глобали ва холатхои муаяншуда", russian: "глобальная система навигации и определения положения", english: "GPS (Global Positioning System)" },
+            { tajik: "сардард", russian: "головная боль", english: "headache" },
+            { tajik: "маркази чизе", russian: "центр чего-л", english: "heart of sth" },
+            { tajik: "тоскулох", russian: "каска", english: "helmet" },
+            { tajik: "хобгохи донишчуен", russian: "студенческое общежитие", english: "hostel" },
+            { tajik: "пуфаки хавой", russian: "монгольфьер", english: "hot air balloon" },
+            { tajik: "чавохирот, заргари", russian: "драгоценности, ювелирные изделия", english: "jewellery" },
+            { tajik: "халтаи чути", russian: "джутовый мешок", english: "jute bag" },
+            { tajik: "кушанда марговар", russian: "смертельный", english: "lethal" },
+            { tajik: "партов", russian: "мусор", english: "litter" },
+            { tajik: "талафот", russian: "потеря", english: "loss" },
+            { tajik: "ба мувафакият ноил шудан", russian: "добиться успеха", english: "make the big time" },
+            { tajik: "азим", russian: "массивный", english: "massive" },
+            { tajik: "пурпечухами", russian: " лабиринт", english: "maze" },
+            { tajik: "точир", russian: "купец", english: "merchant" },
+            { tajik: "гумрохкунанда", russian: "вводящий в заблуждение", english: "misleading" },
+            { tajik: "колибрезй", russian: "формовка", english: "moulding" },
+            { tajik: "кружка", russian: "кружка", english: "mug" },
+            { tajik: "он чизе ки бояд дид", russian: "то, что необходимо увидеть", english: "must-see" },
+            { tajik: "моддаи пластики", russian: "пластический материал", english: "nurdie" },
+            { tajik: "беадаби бешармй", russian: "непристойность", english: "obscenity" },
+            { tajik: "ай ай баён кардани дарди афсус тарс", russian: "ай ой", english: "ouch" },
+            { tajik: "беназорат", russian: "бесконтрольно", english: "out of control" },
+            { tajik: "дурдаст (шахр)", russian: "окраина (города)", english: "outskirts" },
+            { tajik: "берун аз борт", russian: "за бортом", english: "overboard" },
+            { tajik: "хушкигард", russian: "сухопутный", english: "overland" },
+            { tajik: "вакти зиёда аз вакти мукарар шуда", russian: "сверхурочное время", english: "overtime" },
+            { tajik: "баста", russian: "упаковка", english: "packaging" },
+            { tajik: "чазираи бихишти", russian: "райский остров", english: "paradise island" },
+            { tajik: "чудо кардан", russian: "разделять", english: "part" },
+            { tajik: "пуфак", russian: "шарик", english: "pellets" },
+            { tajik: "ёрдамчии шахсй", russian: "личный секретарь", english: "personal assistant" },
+            { tajik: "хушхол, рози", russian: "довольный", english: "pleased with" },
+            { tajik: "пурсупос", russian: "опрос", english: "poll" },
+            { tajik: "ифлос кардан", russian: "загрязнять", english: "pollute" },
+            { tajik: "почта", russian: "почта", english: "posts" },
+            { tajik: "тоза, норасида, вайрон нашуда", russian: "чистый, нетронутый, неиспорченный", english: "pristine" },
+            { tajik: "ғалтондан", russian: "свалить", english: "dump" }
+        ];
+
+        // Vocabulary for Unit 6
+        const unit6Vocabulary = [
+            { tajik: "пляжи пушида", russian: "закрытый пляж", english: "private beach" },
+            { tajik: "фоида", russian: "выгода, польза", english: "profit" },
+            { tajik: "нашриёт", russian: "издательский", english: "publishing" },
+            { tajik: "чоряк", russian: "четверть", english: "quarter" },
+            { tajik: "аксдихи", russian: "отражение", english: "reflection" },
+            { tajik: "натича", russian: "результат", english: "result" },
+            { tajik: "корхой рохсозй", russian: "дорожные работы", english: "roadwork" },
+            { tajik: "рох", russian: "дорога", english: "route" },
+            { tajik: "вайрон кардан, нест кардан", russian: "разрушать", english: "ruin" },
+            { tajik: "сафари", russian: "сафари", english: "safari" },
+            { tajik: "навигасияи спутники", russian: "спутниковая навигация", english: "sat nav" },
+            { tajik: "пулакча", russian: "чешуя", english: "scale" },
+            { tajik: "хархаша", russian: "скандал", english: "scandal" },
+            { tajik: "манзара", russian: "пейзаж", english: "scenery" },
+            { tajik: "гаркшави бо акваланг", russian: "погружение с аквалангом", english: "scuba diving" },
+            { tajik: "фикри иловаги", russian: "дополнительное соображение", english: "second thought" },
+            { tajik: "худхизматкуни", russian: "самообслуживание", english: "self-catering" },
+            { tajik: "баромадан рафтан ба", russian: "выехать в", english: "set off for" },
+            { tajik: "чойи тамошобоб", russian: "осмотр достопримечательностей", english: "sightseeing" },
+            { tajik: "шалп- шулп кардан", russian: "хлюпать", english: "slosh" },
+            { tajik: "чиркин кардан", russian: "пачкать", english: "soil" },
+            { tajik: "сурьати ичозатдодашуда", russian: "дозволенная скорость", english: "speed limit" },
+            { tajik: "вайрон кардан", russian: "портить", english: "spoil" },
+            { tajik: "ташкил кардан", russian: "организовывать", english: "sponsored" },
+            { tajik: "тела додан", russian: "отталкивать", english: "spurn" },
+            { tajik: "чунбидан", russian: "шататься", english: "stagger" },
+            { tajik: "сайру гашт", russian: "прогулка", english: "stroll" },
+            { tajik: "суши", russian: "суши", english: "sushi" },
+            { tajik: "гирд гаштан дар гирдоб", russian: "кружиться в водовороте", english: "swirl" },
+            { tajik: "маъбад, ибодатхона", russian: "храм, церковь", english: "temple" },
+            { tajik: "суфача, пешайвон", russian: "терраса, веранда", english: "terrace" },
+            { tajik: "масохат", russian: "территория", english: "territory" },
+            { tajik: "монархия", russian: "монархия", english: "the monarchy" },
+            { tajik: "таракисти чизхои якбор истифодашаванда", russian: "мусорная цивилизация", english: "throwaway society" },
+            { tajik: "чуткай дандонтозакунй", russian: "зубная щетка", english: "toothbrush" },
+            { tajik: "алокахои тичорати", russian: "торговые связи", english: "trade link" },
+            { tajik: "иваз кардан", russian: "изменять", english: "transform" },
+            { tajik: "халтаи сафар (қутти)", russian: "несессер путешествиям", english: "travel bag" },
+            { tajik: "рохнамо дар саёхат", russian: "гиды в путешествиях", english: "travel guide" },
+            { tajik: "чазираи тропики", russian: "тропический остров", english: "tropical island" },
+            { tajik: "фируза (ранг)", russian: "бирюза", english: "turquoise" },
+            { tajik: "хос махсус", russian: "типичный", english: "typical" },
+            { tajik: "бе ходисаи махсус", russian: "без особенных происшествий", english: "uneventful" },
+            { tajik: "иморати шахси хонаи берун аз шаҳр", russian: "особняк, загородный дом", english: "villa" },
+            { tajik: "хохишманди кори бепул аскари фидои", russian: "волонтер, доброволец", english: "volunteer" },
+            { tajik: "ҳарчи зиёдати", russian: "растрата", english: "waste" },
+            { tajik: "мухаррики бодй ( шамол)", russian: "ветряк, ветротурбина", english: "wind turbine" },
+            { tajik: "дурусти, дакики", russian: "правильность, точность", english: "accuracy" },
+            { tajik: "элон кардани бонги хатар", russian: " объявлять тревогу", english: "alert" },
+            { tajik: "рафтан, баромадан", russian: "сходить, выходить", english: "alight" }
+        ];
+
+        // DOM elements
+        const unitSelection = document.getElementById('unit-selection');
+        const gameScreen = document.getElementById('game-screen');
+        const unitTitle = document.getElementById('unit-title');
+        const wordElement = document.getElementById('word');
+        const translationElement = document.getElementById('translation');
+        const progressElement = document.getElementById('progress');
+        const timerProgressElement = document.getElementById('timer-progress');
+        const timerTextElement = document.getElementById('timer-text');
+        const answerInput = document.getElementById('answer');
+        const submitBtn = document.getElementById('submit-btn');
+        const resultsElement = document.getElementById('results');
+        const scoreElement = document.getElementById('score');
+        const percentageElement = document.getElementById('percentage');
+        const mistakesElement = document.getElementById('mistakes');
+        const errorsContainer = document.getElementById('errors');
+        const successMessage = document.getElementById('success-message');
+        const unit5Btn = document.getElementById('unit5-btn');
+        const unit6Btn = document.getElementById('unit6-btn');
+        const mainContainer = document.getElementById('main-container');
+
+        // Game state
+        let currentVocabulary = [];
+        let currentIndex = 0;
+        let score = 0;
+        let mistakes = [];
+        let timeLeft = 420; // 7 minutes in seconds
+        let timer;
+
+        // Start selected unit
+        function startUnit(unitName, vocabulary) {
+            currentVocabulary = [...vocabulary]; // Copy the array
+            shuffleArray(currentVocabulary); // Shuffle the words
+            
+            currentIndex = 0;
+            score = 0;
+            timeLeft = 420;
+            mistakes = [];
+            
+            unitSelection.style.display = 'none';
+            gameScreen.style.display = 'block';
+            resultsElement.style.display = 'none';
+            
+            unitTitle.textContent = unitName;
+            showWord();
+            startTimer();
+            
+            setTimeout(() => {
+                answerInput.focus();
+            }, 100);
+        }
+
+        // Show current word
+        function showWord() {
+            wordElement.textContent = currentVocabulary[currentIndex].tajik;
+            translationElement.textContent = currentVocabulary[currentIndex].russian;
+            progressElement.textContent = `${currentIndex + 1}/${currentVocabulary.length}`;
+            answerInput.value = '';
+        }
+
+        // Start timer
+        function startTimer() {
+            clearInterval(timer);
+            updateTimer();
+            
+            timer = setInterval(() => {
+                timeLeft--;
+                updateTimer();
+                
+                if (timeLeft <= 0) {
+                    finishGame();
+                }
+            }, 1000);
+        }
+
+        // Update timer display
+        function updateTimer() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timerTextElement.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+            
+            // Update progress circle
+            const progress = (420 - timeLeft) / 420 * 360;
+            timerProgressElement.style.transform = `rotate(${progress}deg)`;
+            
+            // Change color based on time left
+            if (timeLeft < 60) {
+                timerProgressElement.style.backgroundColor = '#e74c3c';
+            } else if (timeLeft < 180) {
+                timerProgressElement.style.backgroundColor = '#f39c12';
+            } else {
+                timerProgressElement.style.backgroundColor = '#4CAF50';
+            }
+        }
+
+        // Check answer
+        function checkAnswer() {
+            const userAnswer = answerInput.value.trim().toLowerCase();
+            const correctAnswer = currentVocabulary[currentIndex].english.toLowerCase();
+            
+            if (userAnswer === correctAnswer) {
+                score++;
+            } else {
+                mistakes.push({
+                    word: currentVocabulary[currentIndex].tajik,
+                    translation: currentVocabulary[currentIndex].russian,
+                    correct: currentVocabulary[currentIndex].english,
+                    userAnswer: userAnswer
+                });
+            }
+            
+            currentIndex++;
+            
+            if (currentIndex < currentVocabulary.length && timeLeft > 0) {
+                showWord();
+            } else {
+                finishGame();
+            }
+        }
+
+        // Finish game and show results
+        function finishGame() {
+            clearInterval(timer);
+            
+            const percentage = Math.round((score / currentVocabulary.length) * 100);
+            
+            scoreElement.textContent = score;
+            percentageElement.textContent = `${percentage}%`;
+            mistakesElement.textContent = mistakes.length;
+            
+            // Display success message based on score
+            if (score >= 42) {
+                successMessage.textContent = "Аъло! Шумо аз 50 калима " + score + "-торо дуруст ҷавоб додед! 🎉";
+                successMessage.style.color = "#27ae60";
+            } else {
+                successMessage.textContent = "Талош кунед, шумо аз 50 калима " + score + "-торо дуруст ҷавоб додед. 💪";
+                successMessage.style.color = "#e74c3c";
+            }
+            
+            // Display errors
+            errorsContainer.innerHTML = '';
+            mistakes.forEach((mistake, index) => {
+                const errorItem = document.createElement('div');
+                errorItem.className = 'error-item';
+                errorItem.innerHTML = `
+                    <div class="error-word">${index + 1}. ${mistake.word} (${mistake.translation})</div>
+                    <div class="correct-answer">Ҷавоби дуруст: ${mistake.correct}</div>
+                    <div class="user-answer">Ҷавоби шумо: ${mistake.userAnswer || '---'}</div>
+                `;
+                errorsContainer.appendChild(errorItem);
+            });
+            
+            // Show results and hide game screen
+            gameScreen.style.display = 'none';
+            resultsElement.style.display = 'block';
+        }
+
+        // Shuffle array function
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        // Event listeners
+        submitBtn.addEventListener('click', checkAnswer);
+        
+        answerInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkAnswer();
+            }
+        });
+
+        // Unit selection buttons
+        unit5Btn.addEventListener('click', () => {
+            startUnit("Юнит 5 Охир", unit5Vocabulary);
+        });
+        
+        unit6Btn.addEventListener('click', () => {
+            startUnit("Юнит 6", unit6Vocabulary);
+        });
+
+        // Reset button (to be added in results screen)
+        function resetGame() {
+            resultsElement.style.display = 'none';
+            unitSelection.style.display = 'flex';
+        }
+    </script>
+</body>
+</html>
