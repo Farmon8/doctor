@@ -1,1 +1,408 @@
+<!DOCTYPE html>
+<html lang="tg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Луғатсупорӣ - Юнит 5 Охир</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header {
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .progress {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+        
+        .word-container {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 1px solid #eee;
+        }
+        
+        .word {
+            font-size: 22px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .translation {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 5px;
+        }
+        
+        .timer-container {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 25px;
+            position: relative;
+        }
+        
+        .timer-circle {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 8px solid #f0f0f0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .timer-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            clip: rect(0, 60px, 120px, 0);
+            background-color: #4CAF50;
+            transform: rotate(0deg);
+        }
+        
+        .timer-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .answer-input {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .submit-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+        
+        .results {
+            display: none;
+            margin-top: 30px;
+            text-align: left;
+        }
+        
+        .results h2 {
+            color: #333;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .stats {
+            margin-bottom: 20px;
+        }
+        
+        .stat-item {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        
+        .stat-value {
+            font-weight: bold;
+        }
+        
+        .errors {
+            margin-top: 20px;
+        }
+        
+        .error-item {
+            background-color: #f8f8f8;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            border-left: 3px solid #e74c3c;
+        }
+        
+        .error-word {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .correct-answer {
+            color: #27ae60;
+        }
+        
+        .user-answer {
+            color: #e74c3c;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Луғатсупорӣ - Юнит 5 Охир</h1>
+            <div class="progress" id="progress">1/50</div>
+        </div>
+        
+        <div class="word-container">
+            <div class="word" id="word">канор, край</div>
+            <div class="translation" id="translation">край</div>
+        </div>
+        
+        <div class="timer-container">
+            <div class="timer-circle">
+                <div class="timer-progress" id="timer-progress"></div>
+                <div class="timer-text" id="timer-text">7:00</div>
+            </div>
+        </div>
+        
+        <input type="text" class="answer-input" id="answer" placeholder="Ҷавобро ба англисӣ нависед..." autocomplete="off">
+        <button class="submit-btn" id="submit-btn">Фиристодан</button>
+        
+        <div class="results" id="results">
+            <h2>Натиҷаҳо</h2>
+            
+            <div class="stats">
+                <div class="stat-item">Шумо <span class="stat-value" id="score">0</span> аз <span class="stat-value">50</span>-ро дуруст ҷавоб додед</div>
+                <div class="stat-item">Фоизи дурустӣ: <span class="stat-value" id="percentage">0%</span></div>
+                <div class="stat-item">Миқдори хатоҳо: <span class="stat-value" id="mistakes">0</span></div>
+            </div>
+            
+            <div class="errors" id="errors">
+                <h3>Хатоҳо:</h3>
+                <!-- Errors will be displayed here -->
+            </div>
+        </div>
+    </div>
 
+    <script>
+        // Vocabulary for Unit 5 End
+        const vocabulary = [
+            { tajik: "канор, край", russian: "край", english: "edge" },
+            { tajik: "император", russian: "император", english: "emperor" },
+            { tajik: "саньати мухандисй", russian: "инженерное искусство", english: "engineering" },
+            { tajik: "ҳолати фавқулодаи экологӣ", russian: "экологическая чрезвычайная ситуация", english: "environmental emergency" },
+            { tajik: "тадкикодчи", russian: "исследователь", english: "explorer" },
+            { tajik: "хавопаймои", russian: "самолёт-истребитель", english: "fighter plane" },
+            { tajik: "пуркунанда, дахана", russian: "наполнитель, воронка", english: "filler" },
+            { tajik: "дог, доги кунчитак", russian: "пятно, веснушка", english: "fleck" },
+            { tajik: "кисм, каср", russian: "часть, дробь", english: "fraction" },
+            { tajik: "пора, порча", russian: "кусок", english: "fragment" },
+            { tajik: "ба кор шуруь кардан", russian: "приступить к делу", english: "get down to business" },
+            { tajik: "фуру бурдан", russian: "поглотать", english: "gobble up" },
+            { tajik: "системаи глобали ва холатхои муаяншуда", russian: "глобальная система навигации и определения положения", english: "GPS (Global Positioning System)" },
+            { tajik: "сардард", russian: "головная боль", english: "headache" },
+            { tajik: "маркази чизе", russian: "центр чего-л", english: "heart of sth" },
+            { tajik: "тоскулох", russian: "каска", english: "helmet" },
+            { tajik: "хобгохи донишчуен", russian: "студенческое общежитие", english: "hostel" },
+            { tajik: "пуфаки хавой", russian: "монгольфьер", english: "hot air balloon" },
+            { tajik: "чавохирот, заргари", russian: "драгоценности, ювелирные изделия", english: "jewellery" },
+            { tajik: "халтаи чути", russian: "джутовый мешок", english: "jute bag" },
+            { tajik: "кушанда марговар", russian: "смертельный", english: "lethal" },
+            { tajik: "партов", russian: "мусор", english: "litter" },
+            { tajik: "талафот", russian: "потеря", english: "loss" },
+            { tajik: "ба мувафакият ноил шудан", russian: "добиться успеха", english: "make the big time" },
+            { tajik: "азим", russian: "массивный", english: "massive" },
+            { tajik: "пурпечухами", russian: "лабиринт", english: "maze" },
+            { tajik: "точир", russian: "купец", english: "merchant" },
+            { tajik: "гумрохкунанда", russian: "вводящий в заблуждение", english: "misleading" },
+            { tajik: "колибрезй", russian: "формовка", english: "moulding" },
+            { tajik: "кружка", russian: "кружка", english: "mug" },
+            { tajik: "он чизе ки бояд дид", russian: "то, что необходимо увидеть", english: "must-see" },
+            { tajik: "моддаи пластики", russian: "пластический материал", english: "nurdie" },
+            { tajik: "беадаби бешармй", russian: "непристойность", english: "obscenity" },
+            { tajik: "ай ай баён кардани дарди афсус тарс", russian: "ай ой", english: "ouch" },
+            { tajik: "беназорат", russian: "бесконтрольно", english: "out of control" },
+            { tajik: "дурдаст (шахр)", russian: "окраина (города)", english: "outskirts" },
+            { tajik: "берун аз борт", russian: "за бортом", english: "overboard" },
+            { tajik: "хушкигард", russian: "сухопутный", english: "overland" },
+            { tajik: "вакти зиёда аз вакти мукарар шуда", russian: "сверхурочное время", english: "overtime" },
+            { tajik: "баста", russian: "упаковка", english: "packaging" },
+            { tajik: "чазираи бихишти", russian: "райский остров", english: "paradise island" },
+            { tajik: "чудо кардан", russian: "разделять", english: "part" },
+            { tajik: "пуфак", russian: "шарик", english: "pellets" },
+            { tajik: "ёрдамчии шахсй", russian: "личный секретарь", english: "personal assistant" },
+            { tajik: "хушхол, рози", russian: "довольный", english: "pleased with" },
+            { tajik: "пурсупос", russian: "опрос", english: "poll" },
+            { tajik: "ифлос кардан", russian: "загрязнять", english: "pollute" },
+            { tajik: "почта", russian: "почта", english: "posts" },
+            { tajik: "тоза, норасида, вайрон нашуда", russian: "чистый, нетронутый, неиспорченный", english: "pristine" },
+            { tajik: "ғалтондан", russian: "свалить", english: "dump" }
+        ];
+
+        // DOM elements
+        const wordElement = document.getElementById('word');
+        const translationElement = document.getElementById('translation');
+        const progressElement = document.getElementById('progress');
+        const timerProgressElement = document.getElementById('timer-progress');
+        const timerTextElement = document.getElementById('timer-text');
+        const answerInput = document.getElementById('answer');
+        const submitBtn = document.getElementById('submit-btn');
+        const resultsElement = document.getElementById('results');
+        const scoreElement = document.getElementById('score');
+        const percentageElement = document.getElementById('percentage');
+        const mistakesElement = document.getElementById('mistakes');
+        const errorsContainer = document.getElementById('errors');
+
+        // Game state
+        let currentIndex = 0;
+        let score = 0;
+        let mistakes = [];
+        let timeLeft = 420; // 7 minutes in seconds
+        let timer;
+
+        // Start the game
+        function startGame() {
+            showWord();
+            startTimer();
+            answerInput.focus();
+        }
+
+        // Show current word
+        function showWord() {
+            wordElement.textContent = vocabulary[currentIndex].tajik;
+            translationElement.textContent = vocabulary[currentIndex].russian;
+            progressElement.textContent = `${currentIndex + 1}/${vocabulary.length}`;
+            answerInput.value = '';
+        }
+
+        // Start timer
+        function startTimer() {
+            clearInterval(timer);
+            updateTimer();
+            
+            timer = setInterval(() => {
+                timeLeft--;
+                updateTimer();
+                
+                if (timeLeft <= 0) {
+                    finishGame();
+                }
+            }, 1000);
+        }
+
+        // Update timer display
+        function updateTimer() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timerTextElement.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+            
+            // Update progress circle
+            const progress = (420 - timeLeft) / 420 * 360;
+            timerProgressElement.style.transform = `rotate(${progress}deg)`;
+        }
+
+        // Check answer
+        function checkAnswer() {
+            const userAnswer = answerInput.value.trim().toLowerCase();
+            const correctAnswer = vocabulary[currentIndex].english.toLowerCase();
+            
+            if (userAnswer === correctAnswer) {
+                score++;
+            } else {
+                mistakes.push({
+                    word: vocabulary[currentIndex].tajik,
+                    translation: vocabulary[currentIndex].russian,
+                    correct: vocabulary[currentIndex].english,
+                    userAnswer: userAnswer
+                });
+            }
+            
+            currentIndex++;
+            
+            if (currentIndex < vocabulary.length && timeLeft > 0) {
+                showWord();
+            } else {
+                finishGame();
+            }
+        }
+
+        // Finish game and show results
+        function finishGame() {
+            clearInterval(timer);
+            
+            const percentage = Math.round((score / vocabulary.length) * 100);
+            
+            scoreElement.textContent = score;
+            percentageElement.textContent = `${percentage}%`;
+            mistakesElement.textContent = mistakes.length;
+            
+            // Display errors
+            errorsContainer.innerHTML = '';
+            mistakes.forEach((mistake, index) => {
+                const errorItem = document.createElement('div');
+                errorItem.className = 'error-item';
+                errorItem.innerHTML = `
+                    <div class="error-word">${index + 1}. ${mistake.word} (${mistake.translation})</div>
+                    <div class="correct-answer">Ҷавоби дуруст: ${mistake.correct}</div>
+                    <div class="user-answer">Ҷавоби шумо: ${mistake.userAnswer || '---'}</div>
+                `;
+                errorsContainer.appendChild(errorItem);
+            });
+            
+            // Show results
+            resultsElement.style.display = 'block';
+            submitBtn.style.display = 'none';
+            answerInput.style.display = 'none';
+        }
+
+        // Event listeners
+        submitBtn.addEventListener('click', checkAnswer);
+        
+        answerInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkAnswer();
+            }
+        });
+
+        // Start the game when page loads
+        startGame();
+    </script>
+</body>
+</html>
